@@ -1,0 +1,32 @@
+name: museum_app
+description: A modern museum application
+
+# Version format is major.minor.patch+build_number
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.1
+  get_it: ^7.6.7
+  dio: ^5.4.0
+  mobile_scanner: ^3.5.6
+  cached_network_image: ^3.3.1
+  google_fonts: ^6.1.0
+  flutter_svg: ^2.0.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+# Flutter specific configurations can be added here
+flutter:
+  uses-material-design: true
+
+  # Add assets configuration
+  assets:
+    - assets/logo.png
