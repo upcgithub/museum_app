@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:museum_app/domain/entities/artwork.dart';
 
 class ArtworkCard extends StatelessWidget {
-  final Map<String, dynamic> artwork;
+  final Artwork artwork;
 
   const ArtworkCard({super.key, required this.artwork});
 
@@ -17,7 +18,7 @@ class ArtworkCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: CachedNetworkImage(
-              imageUrl: artwork['imageUrl'],
+              imageUrl: artwork.imageUrl,
               height: 200,
               width: 200,
               fit: BoxFit.cover,
@@ -29,7 +30,7 @@ class ArtworkCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            artwork['title'],
+            artwork.title,
             style: const TextStyle(
               fontSize: 16,
               fontFamily: 'Playfair',
@@ -37,10 +38,10 @@ class ArtworkCard extends StatelessWidget {
             ),
           ),
           Text(
-            artwork['artist'],
+            artwork.artist,
             style: TextStyle(
               fontFamily: 'Urbanist',
-              fontWeight: FontWeight.w300,
+              fontWeight: FontWeight.w400,
               color: Colors.grey[600],
             ),
           ),

@@ -14,9 +14,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => context.read<MuseumProvider>().loadPopularArtworks(),
-    );
+    Future.microtask(() {
+      final provider = context.read<MuseumProvider>();
+      provider.loadPopularArtworks();
+      provider.loadWhatsNewArtworks();
+    });
   }
 
   @override
@@ -143,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       category['label'] as String,
                       style: const TextStyle(
                         fontFamily: 'Urbanist',
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
@@ -164,15 +166,37 @@ class _HomeScreenState extends State<HomeScreen> {
 
         return SliverList(
           delegate: SliverChildListDelegate([
-            const Padding(
-              padding: EdgeInsets.only(left: 16, bottom: 16, top: 24),
-              child: Text(
-                'Popular',
-                style: TextStyle(
-                  fontFamily: 'Playfair',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 16,
+                right: 16,
+                top: 24,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Popular",
+                    style: TextStyle(
+                      fontFamily: 'Playfair',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Implementar navegación a la vista completa
+                    },
+                    child: const Text(
+                      'View All',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(
@@ -194,7 +218,59 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildWhatsNewSection() {
-    // Similar to Popular section but with different data
-    return const SliverToBoxAdapter(child: SizedBox.shrink());
+    return Consumer<MuseumProvider>(
+      builder: (context, provider, child) {
+        return SliverList(
+          delegate: SliverChildListDelegate([
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 16,
+                right: 16,
+                bottom: 16,
+                top: 24,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "What's new",
+                    style: TextStyle(
+                      fontFamily: 'Playfair',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Implementar navegación a la vista completa
+                    },
+                    child: const Text(
+                      'View All',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 280,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: provider.whatsNewArtworks.length,
+                itemBuilder: (context, index) {
+                  final artwork = provider.whatsNewArtworks[index];
+                  return ArtworkCard(artwork: artwork);
+                },
+              ),
+            ),
+          ]),
+        );
+      },
+    );
   }
 }
