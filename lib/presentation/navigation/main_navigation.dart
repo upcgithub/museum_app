@@ -18,7 +18,7 @@ class _MainNavigationState extends State<MainNavigation> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const TicketsScreen(),
-    const SizedBox(), // Placeholder for QR Scanner
+    // const SizedBox(), // Placeholder for QR Scanner
     const SavedScreen(),
     const ProfileScreen(),
   ];

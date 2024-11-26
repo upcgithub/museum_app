@@ -9,6 +9,7 @@ class MuseumApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Museum App',
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRoutes.onGenerateRoute,
       // initialRoute: AppRoutes.home,
       theme: ThemeData(
