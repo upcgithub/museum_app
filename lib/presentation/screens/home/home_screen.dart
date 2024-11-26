@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/museum_provider.dart';
 import 'package:museum_app/presentation/widgets/artwork_card.dart';
+import 'package:museum_app/presentation/screens/artwork_detail/artwork_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -207,7 +208,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: provider.popularArtworks.length,
                 itemBuilder: (context, index) {
                   final artwork = provider.popularArtworks[index];
-                  return ArtworkCard(artwork: artwork);
+                  // return ArtworkCard(artwork: artwork);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ArtworkDetailScreen(
+                            title: artwork.title,
+                            imageUrl: artwork.imageUrl,
+                            description: artwork.description ?? '',
+                            relatedArtworks: const [
+                              {
+                                'imageUrl':
+                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
+                                'title': 'Vink',
+                              },
+                              {
+                                'imageUrl':
+                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg',
+                                'title': 'The Milkmaid',
+                              },
+                              // Agrega más obras relacionadas según necesites
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    child: ArtworkCard(artwork: artwork),
+                  );
                 },
               ),
             ),
@@ -264,7 +293,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: provider.whatsNewArtworks.length,
                 itemBuilder: (context, index) {
                   final artwork = provider.whatsNewArtworks[index];
-                  return ArtworkCard(artwork: artwork);
+                  // return ArtworkCard(artwork: artwork);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ArtworkDetailScreen(
+                            title: artwork.title,
+                            imageUrl: artwork.imageUrl,
+                            description: artwork.description ?? '',
+                            relatedArtworks: const [
+                              {
+                                'imageUrl':
+                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
+                                'title': 'Vink',
+                              },
+                              {
+                                'imageUrl':
+                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg',
+                                'title': 'The Milkmaid',
+                              },
+                              // Agrega más obras relacionadas según necesites
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    child: ArtworkCard(artwork: artwork),
+                  );
                 },
               ),
             ),
