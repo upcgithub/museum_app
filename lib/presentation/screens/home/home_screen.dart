@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/museum_provider.dart';
 import 'package:museum_app/presentation/widgets/artwork_card.dart';
-import 'package:museum_app/presentation/screens/artwork_detail/artwork_detail_screen.dart';
+import 'package:museum_app/presentation/navigation/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -211,28 +211,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   // return ArtworkCard(artwork: artwork);
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => ArtworkDetailScreen(
-                            title: artwork.title,
-                            imageUrl: artwork.imageUrl,
-                            description: artwork.description ?? '',
-                            relatedArtworks: const [
-                              {
-                                'imageUrl':
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
-                                'title': 'Vink',
-                              },
-                              {
-                                'imageUrl':
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg',
-                                'title': 'The Milkmaid',
-                              },
-                              // Agrega más obras relacionadas según necesites
-                            ],
-                          ),
-                        ),
+                        AppRoutes.artworkDetail,
+                        arguments: {
+                          'title': artwork.title,
+                          'imageUrl': artwork.imageUrl,
+                          'description': artwork.description ?? '',
+                          'relatedArtworks': const [
+                            {
+                              'imageUrl':
+                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
+                              'title': 'Vink',
+                            },
+                            {
+                              'imageUrl':
+                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg',
+                              'title': 'The Milkmaid',
+                            },
+                          ],
+                        },
                       );
                     },
                     child: ArtworkCard(artwork: artwork),
@@ -296,28 +294,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   // return ArtworkCard(artwork: artwork);
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => ArtworkDetailScreen(
-                            title: artwork.title,
-                            imageUrl: artwork.imageUrl,
-                            description: artwork.description ?? '',
-                            relatedArtworks: const [
-                              {
-                                'imageUrl':
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
-                                'title': 'Vink',
-                              },
-                              {
-                                'imageUrl':
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg',
-                                'title': 'The Milkmaid',
-                              },
-                              // Agrega más obras relacionadas según necesites
-                            ],
-                          ),
-                        ),
+                        AppRoutes.artworkDetail,
+                        arguments: {
+                          'title': artwork.title,
+                          'imageUrl': artwork.imageUrl,
+                          'description': artwork.description ?? '',
+                          'relatedArtworks': const [
+                            {
+                              'imageUrl':
+                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
+                              'title': 'Vink',
+                            },
+                            {
+                              'imageUrl':
+                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg',
+                              'title': 'The Milkmaid',
+                            },
+                          ],
+                        },
                       );
                     },
                     child: ArtworkCard(artwork: artwork),
