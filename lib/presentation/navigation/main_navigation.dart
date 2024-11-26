@@ -35,10 +35,6 @@ class _MainNavigationState extends State<MainNavigation> {
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
-          if (index == 2) {
-            // Handle QR Scanner
-            return;
-          }
           setState(() => _selectedIndex = index);
         },
       ),

@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -43,8 +44,30 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Row(
           children: [
             Image.asset('assets/logo.png', height: 40),
-            const SizedBox(width: 12),
-            const Text('Den Haag, Netherlands'),
+            const Spacer(),
+            const Column(
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.location_on_outlined),
+                    Text(
+                      'Location',
+                      style: TextStyle(
+                        fontFamily: 'Playfair',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  'Lima, Peru',
+                  style: TextStyle(
+                    fontFamily: 'Playfair',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
             const Spacer(),
             IconButton(
               icon: const Icon(Icons.confirmation_number_outlined),
@@ -59,14 +82,32 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildSearchBar() {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24),
         child: TextField(
           decoration: InputDecoration(
             hintText: 'Search exhibitions, events...',
-            prefixIcon: const Icon(Icons.search),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+            hintStyle: TextStyle(
+              color: Colors.grey[400],
+              fontSize: 14,
+              fontFamily: 'Urbanist',
+              fontWeight: FontWeight.w400,
             ),
+            prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
+            filled: true,
+            fillColor: const Color(0xFFFAFAFA),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide.none,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Colors.black, width: 1),
+            ),
+            contentPadding: const EdgeInsets.symmetric(vertical: 12),
           ),
         ),
       ),
@@ -75,38 +116,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCategories() {
     final categories = [
-      {'icon': Icons.museum, 'label': 'Exhibition'},
-      {'icon': Icons.event, 'label': 'Events'},
-      {'icon': Icons.palette, 'label': 'Artwork'},
-      {'icon': Icons.person, 'label': 'Artist'},
+      {'icon': Icons.museum_outlined, 'label': 'Exhibition'},
+      {'icon': Icons.event_outlined, 'label': 'Events'},
+      {'icon': Icons.palette_outlined, 'label': 'Artwork'},
+      {'icon': Icons.person_outline, 'label': 'Artist'},
     ];
 
     return SliverToBoxAdapter(
-      child: SizedBox(
-        height: 100,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            final category = categories[index];
-            return Padding(
-              padding: const EdgeInsets.only(right: 24),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primaryContainer,
-                    child: Icon(category['icon'] as IconData),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(category['label'] as String),
-                ],
-              ),
-            );
-          },
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: categories
+            .map((category) => Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircleAvatar(
+                      radius: 24,
+                      backgroundColor: Colors.black,
+                      child: Icon(
+                        category['icon'] as IconData,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      category['label'] as String,
+                      style: const TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ))
+            .toList(),
       ),
     );
   }
@@ -123,12 +165,13 @@ class _HomeScreenState extends State<HomeScreen> {
         return SliverList(
           delegate: SliverChildListDelegate([
             const Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.only(left: 16, bottom: 16, top: 24),
               child: Text(
                 'Popular',
                 style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Playfair',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),

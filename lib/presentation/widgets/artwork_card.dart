@@ -32,12 +32,15 @@ class ArtworkCard extends StatelessWidget {
             artwork['title'],
             style: const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontFamily: 'Playfair',
+              fontWeight: FontWeight.w700,
             ),
           ),
           Text(
             artwork['artist'],
             style: TextStyle(
+              fontFamily: 'Urbanist',
+              fontWeight: FontWeight.w300,
               color: Colors.grey[600],
             ),
           ),

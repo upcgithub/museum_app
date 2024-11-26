@@ -4,12 +4,36 @@ class MuseumService {
     return [
       {
         'id': '1',
-        'title': 'The Night Watch',
+        'title': 'Anatomie des Dr. Tulp',
         'artist': 'Rembrandt',
-        'imageUrl': 'https://example.com/night-watch.jpg',
+        'imageUrl':
+            'https://www.reprodart.com/kunst/rembrandt_hamerszoon_van_rijn/anatomie-des-dr-tulp.jpg',
         'type': 'Painting',
       },
-      // Add more items...
+      {
+        'id': '2',
+        'title': 'Vink',
+        'artist': 'Jan Fabritius',
+        'imageUrl':
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
+        'type': 'Painting',
+      },
+      {
+        'id': '3',
+        'title': 'Anatomie des Dr. Tulp',
+        'artist': 'Rembrandt',
+        'imageUrl':
+            'https://www.reprodart.com/kunst/rembrandt_hamerszoon_van_rijn/anatomie-des-dr-tulp.jpg',
+        'type': 'Painting',
+      },
+      {
+        'id': '4',
+        'title': 'Anatomie des Dr. Tulp',
+        'artist': 'Rembrandt',
+        'imageUrl':
+            'https://www.reprodart.com/kunst/rembrandt_hamerszoon_van_rijn/anatomie-des-dr-tulp.jpg',
+        'type': 'Painting',
+      },
     ];
   }
 }
