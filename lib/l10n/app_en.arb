@@ -3,5 +3,19 @@
     "home": "Home",
     "profile": "Profile",
     "settings": "Settings",
-    "premiumMember": "Premium Member"
+    "premiumMember": "Premium Member",
+    "profileName": "Jane Doe",
+    "profileEmail": "jane.doe@example.com",
+    "savedArtworks": "Saved Artworks",
+    "tickets": "Tickets",
+    "exhibitions": "Exhibitions",
+    "qrScans": "QR Scans",
+    "editProfile": "Edit Profile",
+    "languagePreferences": "Language Preferences",
+    "accessibilitySettings": "Accessibility Settings",
+    "notificationSettings": "Notification Settings",
+    "logout": "Logout",
+    "logoutConfirmation": "Are you sure you want to logout?",
+    "cancel": "Cancel",
+    "artQuote": "Art enables us to find ourselves and lose ourselves at the same time."
 } 

@@ -8,24 +8,24 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: [
-                const SizedBox(height: 20),
-                _buildProfileHeader(context),
-                const SizedBox(height: 30),
-                _buildQuickLinks(),
-                const SizedBox(height: 30),
-                _buildSettings(),
-                const SizedBox(height: 30),
-                _buildLogoutButton(context),
-                const SizedBox(height: 20),
-                _buildFooterQuote(),
-                const SizedBox(height: 30),
+                SizedBox(height: 20),
+                ProfileHeader(),
+                SizedBox(height: 30),
+                QuickLinks(),
+                SizedBox(height: 30),
+                SettingsSection(),
+                SizedBox(height: 30),
+                LogoutButton(),
+                SizedBox(height: 20),
+                FooterQuote(),
+                SizedBox(height: 30),
               ],
             ),
           ),
@@ -33,8 +33,14 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildProfileHeader(BuildContext context) {
+class ProfileHeader extends StatelessWidget {
+  const ProfileHeader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         Stack(
@@ -76,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          'Jane Doe',
+          l10n.profileName,
           style: AppTextStyles.heading.copyWith(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -84,7 +90,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'jane.doe@example.com',
+          l10n.profileEmail,
           style: AppTextStyles.body.copyWith(
             color: Colors.grey,
           ),
@@ -97,7 +103,7 @@ class ProfileScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
-            AppLocalizations.of(context)!.premiumMember,
+            l10n.premiumMember,
             style: AppTextStyles.body.copyWith(
               color: AppColors.primary,
               fontWeight: FontWeight.w600,
@@ -107,8 +113,14 @@ class ProfileScreen extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildQuickLinks() {
+class QuickLinks extends StatelessWidget {
+  const QuickLinks({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return GridView.count(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -117,35 +129,45 @@ class ProfileScreen extends StatelessWidget {
       crossAxisSpacing: 16,
       childAspectRatio: 1.5,
       children: [
-        _buildQuickLinkCard(
+        QuickLinkCard(
           icon: Icons.bookmark,
-          title: 'Saved Artworks',
+          title: l10n.savedArtworks,
           count: '23',
         ),
-        _buildQuickLinkCard(
+        QuickLinkCard(
           icon: Icons.confirmation_number,
-          title: 'Tickets',
+          title: l10n.tickets,
           count: '3',
         ),
-        _buildQuickLinkCard(
+        QuickLinkCard(
           icon: Icons.museum,
-          title: 'Exhibitions',
+          title: l10n.exhibitions,
           count: '12',
         ),
-        _buildQuickLinkCard(
+        QuickLinkCard(
           icon: Icons.qr_code,
-          title: 'QR Scans',
+          title: l10n.qrScans,
           count: '45',
         ),
       ],
     );
   }
+}
 
-  Widget _buildQuickLinkCard({
-    required IconData icon,
-    required String title,
-    required String count,
-  }) {
+class QuickLinkCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String count;
+
+  const QuickLinkCard({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.count,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -188,48 +210,58 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSettings() {
+class SettingsSection extends StatelessWidget {
+  const SettingsSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Settings',
+          l10n.settings,
           style: AppTextStyles.heading.copyWith(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: 16),
-        _buildSettingTile(
+        SettingTile(
           icon: Icons.person,
-          title: 'Edit Profile',
-          onTap: () {},
+          title: l10n.editProfile,
         ),
-        _buildSettingTile(
+        SettingTile(
           icon: Icons.language,
-          title: 'Language Preferences',
-          onTap: () {},
+          title: l10n.languagePreferences,
         ),
-        _buildSettingTile(
+        SettingTile(
           icon: Icons.accessibility_new,
-          title: 'Accessibility Settings',
-          onTap: () {},
+          title: l10n.accessibilitySettings,
         ),
-        _buildSettingTile(
+        SettingTile(
           icon: Icons.notifications,
-          title: 'Notification Settings',
-          onTap: () {},
+          title: l10n.notificationSettings,
         ),
       ],
     );
   }
+}
 
-  Widget _buildSettingTile({
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-  }) {
+class SettingTile extends StatelessWidget {
+  final IconData icon;
+  final String title;
+
+  const SettingTile({
+    Key? key,
+    required this.icon,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: Container(
@@ -247,11 +279,17 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
       trailing: const Icon(Icons.chevron_right),
-      onTap: onTap,
+      onTap: () {},
     );
   }
+}
 
-  Widget _buildLogoutButton(BuildContext context) {
+class LogoutButton extends StatelessWidget {
+  const LogoutButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
@@ -259,19 +297,19 @@ class ProfileScreen extends StatelessWidget {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: const Text('Logout'),
-              content: const Text('Are you sure you want to logout?'),
+              title: Text(l10n.logout),
+              content: Text(l10n.logoutConfirmation),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel'),
+                  child: Text(l10n.cancel),
                 ),
                 TextButton(
                   onPressed: () {
                     // Handle logout
                     Navigator.pop(context);
                   },
-                  child: const Text('Logout'),
+                  child: Text(l10n.logout),
                 ),
               ],
             ),
@@ -284,9 +322,9 @@ class ProfileScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        child: const Text(
-          'Logout',
-          style: TextStyle(
+        child: Text(
+          l10n.logout,
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -295,8 +333,14 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildFooterQuote() {
+class FooterQuote extends StatelessWidget {
+  const FooterQuote({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -304,9 +348,8 @@ class ProfileScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
-        '"Art enables us to find ourselves and lose ourselves at the same time."',
+        l10n.artQuote,
         style: AppTextStyles.body.copyWith(
-          // fontStyle: FontStyle.italic,
           color: AppColors.primary,
         ),
         textAlign: TextAlign.center,

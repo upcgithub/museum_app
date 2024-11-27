@@ -3,5 +3,21 @@
     "home": "Inicio",
     "profile": "Perfil",
     "settings": "Ajustes",
-    "premiumMember": "Miembro Premium"
+    "premiumMember": "Miembro Premium",
+    "profileName": "Jane Doe",
+    "profileEmail": "jane.doe@example.com",
+    "premiumMember": "Miembro Premium",
+    "savedArtworks": "Obras Guardadas",
+    "tickets": "Entradas",
+    "exhibitions": "Exposiciones",
+    "qrScans": "Escaneos QR",
+    "editProfile": "Editar Perfil",
+    "languagePreferences": "Preferencias de Idioma",
+    "accessibilitySettings": "Ajustes de Accesibilidad",
+    "notificationSettings": "Ajustes de Notificaciones",
+    "logout": "Cerrar Sesión",
+    "logoutConfirmation": "¿Estás seguro de que quieres cerrar sesión?",
+    "cancel": "Cancelar",
+    "artQuote": "El arte nos permite encontrarnos y perdernos al mismo tiempo."
+
 } 
