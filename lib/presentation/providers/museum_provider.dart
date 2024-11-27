@@ -37,4 +37,8 @@ class MuseumProvider extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  Future<Artwork?> getArtworkById(String id) async {
+    return await _museumService.getArtworkById(id);
+  }
 }

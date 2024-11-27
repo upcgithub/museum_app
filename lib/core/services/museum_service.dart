@@ -32,7 +32,17 @@ class MuseumService {
         "type": "Special Exhibition",
         "description":
             "The Penitent Magdalene is one of Georges de La Tour's most captivating works, painted in the 17th century. This Baroque masterpiece depicts Mary Magdalene in a moment of deep introspection, seated in front of a candle whose warm light softly illuminates the scene. Her hand rests on a skull, symbolizing mortality and repentance.\n\nThe composition reflects La Tour's mastery of creating dramatic contrasts through chiaroscuro. The surrounding darkness of the room contrasts with the candlelight, which delicately outlines Magdalene's figure. This effect not only emphasizes the meditative atmosphere but also underscores the fleeting nature of life.\n\nThe painting invites viewers to reflect on themes such as repentance, spirituality, and human fragility. It remains one of La Tour's most iconic pieces and a masterful example of his ability to combine simplicity with profound emotional depth in his art."
-      }
+      },
+      {
+        "id": "4",
+        "title": "The Starry Night",
+        "artist": "Vincent van Gogh",
+        "imageUrl":
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/440px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+        "type": "Permanent Exhibition",
+        "description":
+            "The Starry Night, painted in 1889 by Vincent van Gogh, is one of the most recognizable works in the history of Western art. This masterpiece portrays a turbulent night sky filled with swirling clouds, bright stars, and a radiant crescent moon, all painted with Van Gogh's iconic thick brushstrokes.\n\nThe painting captures a view from the window of Van Gogh's asylum room in Saint-Rémy-de-Provence, France. The vibrant colors and emotional intensity of the work reflect Van Gogh's inner turmoil and his fascination with the cosmos. The cypress trees in the foreground reach upwards, creating a connection between the earth and the heavens.\n\nThe Starry Night is celebrated not only for its visual impact but also for its emotional depth. It has inspired countless interpretations and remains a symbol of Van Gogh's artistic genius and his ability to convey the complexity of human emotion through art."
+      },
     ];
 
     return rawData.map((data) => Artwork.fromMap(data)).toList();
@@ -75,5 +85,23 @@ class MuseumService {
     ];
 
     return rawData.map((data) => Artwork.fromMap(data)).toList();
+  }
+
+  // in the future, this method will fetch data from an API
+  Future<List<Artwork>> getAllArtworks() async {
+    final popularArtworks = await getPopularArtworks();
+    final whatsNewArtworks = await getWhatsNewArtworks();
+
+    return [...popularArtworks, ...whatsNewArtworks];
+  }
+
+  // in the future, this method will fetch data from an API
+  Future<Artwork?> getArtworkById(String id) async {
+    try {
+      final artworks = await getAllArtworks();
+      return artworks.firstWhere((artwork) => artwork.id == id);
+    } catch (e) {
+      return null;
+    }
   }
 }
