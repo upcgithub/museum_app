@@ -68,7 +68,7 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
     if (_isPlaying) {
       await _audioPlayer.pause();
     } else {
-      await _audioPlayer.play(AssetSource('/audio/1.mp3'));
+      await _audioPlayer.play(AssetSource(audioUrl));
     }
   }
 
