@@ -14,14 +14,27 @@ class MainNavigation extends StatefulWidget {
 
 class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0;
+  late final List<Widget> _screens;
 
-  final List<Widget> _screens = [
-    const HomeScreen(),
-    const TicketsScreen(),
-    // const SizedBox(), // Placeholder for QR Scanner
-    const SavedScreen(),
-    const ProfileScreen(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      const HomeScreen(),
+      const TicketsScreen(),
+      const SavedScreen(key: PageStorageKey('saved_screen')),
+      const ProfileScreen(),
+    ];
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      if (index == 2) {
+        _screens[2] = SavedScreen(key: UniqueKey());
+      }
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +47,7 @@ class _MainNavigationState extends State<MainNavigation> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() => _selectedIndex = index);
-        },
+        onTap: _onItemTapped,
       ),
     );
   }

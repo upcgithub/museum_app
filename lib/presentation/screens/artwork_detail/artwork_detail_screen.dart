@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:museum_app/core/services/database_service.dart';
+import 'package:museum_app/core/models/saved_artwork.dart';
 
-class ArtworkDetailScreen extends StatelessWidget {
+class ArtworkDetailScreen extends StatefulWidget {
   final String title;
   final String imageUrl;
   final bool isViewed;
@@ -17,6 +19,43 @@ class ArtworkDetailScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _ArtworkDetailScreenState createState() => _ArtworkDetailScreenState();
+}
+
+class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
+  bool _isSaved = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfSaved();
+  }
+
+  Future<void> _checkIfSaved() async {
+    final isSaved = await DatabaseService.instance.isArtworkSaved(widget.title);
+    setState(() {
+      _isSaved = isSaved;
+    });
+  }
+
+  Future<void> _toggleSave() async {
+    if (_isSaved) {
+      await DatabaseService.instance.deleteArtwork(widget.title);
+    } else {
+      final artwork = SavedArtwork(
+        title: widget.title,
+        imageUrl: widget.imageUrl,
+        description: widget.description,
+        savedAt: DateTime.now(),
+      );
+      await DatabaseService.instance.saveArtwork(artwork);
+    }
+    setState(() {
+      _isSaved = !_isSaved;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -30,7 +69,7 @@ class ArtworkDetailScreen extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.5,
                   width: double.infinity,
                   child: Image.network(
-                    imageUrl,
+                    widget.imageUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -40,7 +79,7 @@ class ArtworkDetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        widget.title,
                         style: const TextStyle(
                           fontFamily: 'Playfair',
                           fontSize: 24,
@@ -48,17 +87,21 @@ class ArtworkDetailScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      /*const Text(
-                        'Description',
-                        style: TextStyle(
-                          fontFamily: 'Playfair',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ),
-                      ),*/
+                      /*TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, AppRoutes.saved);
+                          },
+                          child: const Text(
+                            'go to saved',
+                            style: TextStyle(
+                              fontFamily: 'Playfair',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                            ),
+                          )),*/
                       const SizedBox(height: 8),
                       Text(
-                        description,
+                        widget.description,
                         maxLines: 6,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -98,9 +141,9 @@ class ArtworkDetailScreen extends StatelessWidget {
                         height: 200,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: relatedArtworks.length,
+                          itemCount: widget.relatedArtworks.length,
                           itemBuilder: (context, index) {
-                            final artwork = relatedArtworks[index];
+                            final artwork = widget.relatedArtworks[index];
                             return Padding(
                               padding: const EdgeInsets.only(right: 16),
                               child: Stack(
@@ -168,20 +211,18 @@ class ArtworkDetailScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
-                      icon: const Icon(
-                        Icons.bookmark_border,
+                      icon: Icon(
+                        _isSaved ? Icons.bookmark : Icons.bookmark_border,
                         color: Colors.white,
                       ),
-                      onPressed: () {
-                        // Implementar lógica de bookmark
-                      },
+                      onPressed: _toggleSave,
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          if (isViewed)
+          if (widget.isViewed)
             Positioned(
               top: MediaQuery.of(context).size.height * 0.5 - 40,
               left: 16,
