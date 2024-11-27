@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:museum_app/core/theme/app_text_styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                _buildProfileHeader(),
+                _buildProfileHeader(context),
                 const SizedBox(height: 30),
                 _buildQuickLinks(),
                 const SizedBox(height: 30),
@@ -33,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileHeader() {
+  Widget _buildProfileHeader(BuildContext context) {
     return Column(
       children: [
         Stack(
@@ -96,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
-            'Premium Member',
+            AppLocalizations.of(context)!.premiumMember,
             style: AppTextStyles.body.copyWith(
               color: AppColors.primary,
               fontWeight: FontWeight.w600,

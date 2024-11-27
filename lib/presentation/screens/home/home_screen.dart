@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/museum_provider.dart';
 import 'package:museum_app/presentation/widgets/artwork_card.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,6 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.appTitle),
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(
