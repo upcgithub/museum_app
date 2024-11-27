@@ -42,6 +42,7 @@ class SavedScreen extends StatelessWidget {
                     context,
                     AppRoutes.artworkDetail,
                     arguments: {
+                      'id': artwork.id,
                       'title': artwork.title,
                       'imageUrl': artwork.imageUrl,
                       'description': artwork.description,

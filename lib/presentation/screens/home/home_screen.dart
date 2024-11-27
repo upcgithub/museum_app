@@ -222,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         AppRoutes.artworkDetail,
                         arguments: {
+                          'id': artwork.id,
                           'title': artwork.title,
                           'imageUrl': artwork.imageUrl,
                           'description': artwork.description ?? '',
@@ -305,6 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         AppRoutes.artworkDetail,
                         arguments: {
+                          'id': artwork.id,
                           'title': artwork.title,
                           'imageUrl': artwork.imageUrl,
                           'description': artwork.description ?? '',

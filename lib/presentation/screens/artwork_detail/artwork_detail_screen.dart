@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:museum_app/core/services/database_service.dart';
 import 'package:museum_app/core/models/saved_artwork.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ArtworkDetailScreen extends StatefulWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final bool isViewed;
@@ -11,6 +15,7 @@ class ArtworkDetailScreen extends StatefulWidget {
 
   const ArtworkDetailScreen({
     Key? key,
+    required this.id,
     required this.title,
     required this.imageUrl,
     this.isViewed = false,
@@ -24,11 +29,47 @@ class ArtworkDetailScreen extends StatefulWidget {
 
 class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
   bool _isSaved = false;
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  bool _isPlaying = false;
 
   @override
   void initState() {
     super.initState();
     _checkIfSaved();
+    _setupAudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  void _setupAudioPlayer() {
+    _audioPlayer.onPlayerStateChanged.listen((state) {
+      setState(() {
+        _isPlaying = state == PlayerState.playing;
+      });
+    });
+
+    _audioPlayer.onPlayerComplete.listen((_) {
+      setState(() {
+        _isPlaying = false;
+      });
+    });
+  }
+
+  Future<void> _togglePlay() async {
+    final audioUrl =
+        'audio/${widget.id.replaceAll(' ', '_').toLowerCase()}.mp3';
+
+    log('Audio URL: $audioUrl');
+
+    if (_isPlaying) {
+      await _audioPlayer.pause();
+    } else {
+      await _audioPlayer.play(AssetSource('/audio/1.mp3'));
+    }
   }
 
   Future<void> _checkIfSaved() async {
@@ -78,13 +119,36 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.title,
-                        style: const TextStyle(
-                          fontFamily: 'Playfair',
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              widget.title,
+                              style: const TextStyle(
+                                fontFamily: 'Playfair',
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: const Color(0xFFA69365),
+                            ),
+                            child: IconButton(
+                              icon: Icon(
+                                _isPlaying ? Icons.pause : Icons.play_arrow,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              onPressed: _togglePlay,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 16),
                       /*TextButton(

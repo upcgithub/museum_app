@@ -22,6 +22,7 @@ dependencies:
   flutter_svg: ^2.0.9
   sqflite: ^2.3.0
   path: ^1.8.3
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +37,7 @@ flutter:
   # Add assets configuration
   assets:
     - assets/
+    - assets/audio/
   fonts:
     - family: Playfair
       fonts:

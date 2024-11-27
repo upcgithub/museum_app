@@ -20,6 +20,7 @@ class AppRoutes {
         final args = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => ArtworkDetailScreen(
+            id: args['id'],
             title: args['title'],
             imageUrl: args['imageUrl'],
             description: args['description'],
