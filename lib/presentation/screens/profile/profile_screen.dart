@@ -121,35 +121,43 @@ class QuickLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return GridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      childAspectRatio: 1.5,
-      children: [
-        QuickLinkCard(
-          icon: Icons.bookmark,
-          title: l10n.savedArtworks,
-          count: '23',
-        ),
-        QuickLinkCard(
-          icon: Icons.confirmation_number,
-          title: l10n.tickets,
-          count: '3',
-        ),
-        QuickLinkCard(
-          icon: Icons.museum,
-          title: l10n.exhibitions,
-          count: '12',
-        ),
-        QuickLinkCard(
-          icon: Icons.qr_code,
-          title: l10n.qrScans,
-          count: '45',
-        ),
-      ],
+    final screenWidth = MediaQuery.of(context).size.width;
+    final aspectRatio = screenWidth > 600 ? 1.5 : 1.3;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GridView.count(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: 2,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          childAspectRatio: aspectRatio,
+          padding: const EdgeInsets.all(8),
+          children: [
+            QuickLinkCard(
+              icon: Icons.bookmark,
+              title: l10n.savedArtworks,
+              count: '23',
+            ),
+            QuickLinkCard(
+              icon: Icons.confirmation_number,
+              title: l10n.tickets,
+              count: '3',
+            ),
+            QuickLinkCard(
+              icon: Icons.museum,
+              title: l10n.exhibitions,
+              count: '12',
+            ),
+            QuickLinkCard(
+              icon: Icons.qr_code,
+              title: l10n.qrScans,
+              count: '45',
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -186,22 +194,31 @@ class QuickLinkCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           onTap: () {},
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(12),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: Colors.black, size: 28),
-                const SizedBox(height: 8),
-                Text(
-                  title,
-                  style: AppTextStyles.body.copyWith(
-                    fontWeight: FontWeight.w600,
+                Icon(icon, color: Colors.black, size: 24),
+                const SizedBox(height: 4),
+                Flexible(
+                  child: Text(
+                    title,
+                    style: AppTextStyles.body.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 2),
                 Text(
                   count,
-                  style: AppTextStyles.counter,
+                  style: AppTextStyles.counter.copyWith(
+                    fontSize: 14,
+                  ),
                 ),
               ],
             ),
