@@ -129,27 +129,34 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: categories
-            .map((category) => Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircleAvatar(
-                      radius: 24,
-                      backgroundColor: Colors.black,
-                      child: Icon(
-                        category['icon'] as IconData,
-                        color: Colors.white,
-                        size: 24,
+            .map((category) => GestureDetector(
+                  onTap: () {
+                    if (category['label'] == 'Artwork') {
+                      Navigator.pushNamed(context, AppRoutes.artworks);
+                    }
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircleAvatar(
+                        radius: 24,
+                        backgroundColor: Colors.black,
+                        child: Icon(
+                          category['icon'] as IconData,
+                          color: Colors.white,
+                          size: 24,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      category['label'] as String,
-                      style: const TextStyle(
-                        fontFamily: 'Urbanist',
-                        fontWeight: FontWeight.w500,
+                      const SizedBox(height: 8),
+                      Text(
+                        category['label'] as String,
+                        style: const TextStyle(
+                          fontFamily: 'Urbanist',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ))
             .toList(),
       ),

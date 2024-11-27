@@ -157,19 +157,6 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  Positioned(
-                                    top: 8,
-                                    right: 8,
-                                    child: IconButton(
-                                      icon: const Icon(
-                                        Icons.bookmark_border,
-                                        color: Colors.white,
-                                      ),
-                                      onPressed: () {
-                                        // Implementar lógica de bookmark
-                                      },
-                                    ),
-                                  ),
                                 ],
                               ),
                             );

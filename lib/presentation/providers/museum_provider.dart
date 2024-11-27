@@ -7,6 +7,7 @@ class MuseumProvider extends ChangeNotifier {
   bool isLoading = false;
   List<Artwork> popularArtworks = [];
   List<Artwork> whatsNewArtworks = [];
+  List<Artwork> allArtworks = [];
 
   MuseumProvider(this._museumService);
 
@@ -32,6 +33,20 @@ class MuseumProvider extends ChangeNotifier {
       whatsNewArtworks = await _museumService.getWhatsNewArtworks();
     } catch (e) {
       print('Error loading new artworks: $e');
+    }
+
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> loadAllArtworks() async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      allArtworks = await _museumService.getAllArtworks();
+    } catch (e) {
+      print('Error loading all artworks: $e');
     }
 
     isLoading = false;

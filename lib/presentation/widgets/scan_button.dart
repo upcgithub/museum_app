@@ -69,7 +69,7 @@ class ScanButton extends StatelessWidget {
             {
               'imageUrl':
                   'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
-              'title': 'Vink',
+              'title': 'Chaffinch',
             },
             {
               'imageUrl':
