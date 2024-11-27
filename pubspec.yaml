@@ -31,7 +31,7 @@ flutter:
 
   # Add assets configuration
   assets:
-    - assets/logo.png
+    - assets/
   fonts:
     - family: Playfair
       fonts:
