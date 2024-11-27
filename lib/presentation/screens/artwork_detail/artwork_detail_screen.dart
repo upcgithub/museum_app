@@ -31,6 +31,7 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
   bool _isSaved = false;
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isPlaying = false;
+  bool _isExpanded = false;
 
   @override
   void initState() {
@@ -135,9 +136,9 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
                           Container(
                             width: 40,
                             height: 40,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: const Color(0xFFA69365),
+                              color: Color(0xFFA69365),
                             ),
                             child: IconButton(
                               icon: Icon(
@@ -151,38 +152,46 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
                         ],
                       ),
                       const SizedBox(height: 16),
-                      /*TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, AppRoutes.saved);
-                          },
-                          child: const Text(
-                            'go to saved',
-                            style: TextStyle(
-                              fontFamily: 'Playfair',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
+                      AnimatedCrossFade(
+                        firstChild: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.description,
+                              maxLines: 4,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontFamily: 'Urbanist',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
                             ),
-                          )),*/
-                      const SizedBox(height: 8),
-                      Text(
-                        widget.description,
-                        maxLines: 6,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontFamily: 'Urbanist',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                          ],
                         ),
+                        secondChild: Text(
+                          widget.description,
+                          style: const TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
+                        ),
+                        crossFadeState: _isExpanded
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst,
+                        duration: const Duration(milliseconds: 300),
                       ),
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: () {
-                            // Implementar lógica para mostrar más
+                            setState(() {
+                              _isExpanded = !_isExpanded;
+                            });
                           },
-                          child: const Text(
-                            'Read more',
-                            style: TextStyle(
+                          child: Text(
+                            _isExpanded ? 'Read less' : 'Read more',
+                            style: const TextStyle(
                               fontFamily: 'Urbanist',
                               fontWeight: FontWeight.w600,
                               color: Color(0xFFA69365),
