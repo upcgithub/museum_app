@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/saved_artworks_provider.dart';
 import 'package:museum_app/domain/entities/artwork.dart';
+import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class ArtworkDetailScreen extends StatefulWidget {
@@ -132,8 +133,17 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
             isNowSaved
                 ? '${widget.title} saved to your collection'
                 : '${widget.title} removed from your collection',
+            style: const TextStyle(
+              fontFamily: 'Urbanist',
+              fontWeight: FontWeight.w500,
+            ),
           ),
-          backgroundColor: isNowSaved ? Colors.green : Colors.orange,
+          backgroundColor: isNowSaved ? AppColors.success : AppColors.warning,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          margin: const EdgeInsets.all(16),
           duration: const Duration(seconds: 2),
         ),
       );

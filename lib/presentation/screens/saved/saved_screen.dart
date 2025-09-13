@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/saved_artworks_provider.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
+import 'package:museum_app/core/theme/app_colors.dart';
 
 class SavedScreen extends StatefulWidget {
   const SavedScreen({Key? key}) : super(key: key);
@@ -137,7 +138,7 @@ class _SavedScreenState extends State<SavedScreen> {
                   alignment: Alignment.centerRight,
                   padding: const EdgeInsets.only(right: 20),
                   decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.1),
+                    color: AppColors.errorLight,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -145,14 +146,14 @@ class _SavedScreenState extends State<SavedScreen> {
                     children: [
                       Icon(
                         Icons.delete_outline,
-                        color: Colors.red[400],
+                        color: AppColors.error,
                         size: 28,
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Remove',
                         style: TextStyle(
-                          color: Colors.red[400],
+                          color: AppColors.error,
                           fontSize: 12,
                           fontFamily: 'Urbanist',
                           fontWeight: FontWeight.w500,
@@ -172,22 +173,41 @@ class _SavedScreenState extends State<SavedScreen> {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('${artwork.title} removed from saved'),
-                        backgroundColor: Colors.red[400],
+                        content: Text(
+                          '${artwork.title} removed from saved',
+                          style: const TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        backgroundColor: AppColors.error,
                         behavior: SnackBarBehavior.floating,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(12),
                         ),
+                        margin: const EdgeInsets.all(16),
                         action: SnackBarAction(
                           label: 'Undo',
                           textColor: Colors.white,
+                          backgroundColor: Colors.white.withOpacity(0.2),
                           onPressed: () {
                             // TODO: Implementar undo functionality
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content:
-                                    Text('Undo functionality coming soon!'),
-                                duration: Duration(seconds: 1),
+                              SnackBar(
+                                content: const Text(
+                                  'Undo functionality coming soon!',
+                                  style: TextStyle(
+                                    fontFamily: 'Urbanist',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                backgroundColor: AppColors.info,
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                margin: const EdgeInsets.all(16),
+                                duration: const Duration(seconds: 1),
                               ),
                             );
                           },
@@ -233,13 +253,19 @@ class _SavedScreenState extends State<SavedScreen> {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content:
-                                Text('${artwork.title} removed from saved'),
-                            backgroundColor: Colors.orange[400],
+                            content: Text(
+                              '${artwork.title} removed from saved',
+                              style: const TextStyle(
+                                fontFamily: 'Urbanist',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            backgroundColor: AppColors.warning,
                             behavior: SnackBarBehavior.floating,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(12),
                             ),
+                            margin: const EdgeInsets.all(16),
                           ),
                         );
                       }
@@ -266,7 +292,7 @@ class _SavedScreenState extends State<SavedScreen> {
           children: [
             Icon(
               Icons.bookmark_remove,
-              color: Colors.orange[400],
+              color: AppColors.warning,
               size: 24,
             ),
             const SizedBox(width: 8),
@@ -315,7 +341,7 @@ class _SavedScreenState extends State<SavedScreen> {
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red[400],
+              backgroundColor: AppColors.error,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
