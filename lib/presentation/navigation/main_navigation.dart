@@ -29,9 +29,6 @@ class _MainNavigationState extends State<MainNavigation> {
 
   void _onItemTapped(int index) {
     setState(() {
-      if (index == 2) {
-        _screens[2] = SavedScreen(key: UniqueKey());
-      }
       _selectedIndex = index;
     });
   }
