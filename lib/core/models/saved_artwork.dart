@@ -1,12 +1,12 @@
 class SavedArtwork {
-  final int? id;
+  final String id; // Cambiar de int? a String para consistencia
   final String title;
   final String imageUrl;
   final String description;
   final DateTime savedAt;
 
   SavedArtwork({
-    this.id,
+    required this.id, // Ahora es requerido
     required this.title,
     required this.imageUrl,
     required this.description,

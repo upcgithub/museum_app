@@ -20,15 +20,16 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2, // Incrementar versión para migración
       onCreate: _createDB,
+      onUpgrade: _upgradeDB,
     );
   }
 
   Future _createDB(Database db, int version) async {
     await db.execute('''
       CREATE TABLE saved_artworks(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
         imageUrl TEXT NOT NULL,
         description TEXT NOT NULL,
@@ -37,18 +38,22 @@ class DatabaseService {
     ''');
   }
 
+  Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      // Migrar de int id a String id
+      await db.execute('DROP TABLE IF EXISTS saved_artworks');
+      await _createDB(db, newVersion);
+    }
+  }
+
   Future<SavedArtwork> saveArtwork(SavedArtwork artwork) async {
     final db = await instance.database;
-    final id = await db.insert('saved_artworks', artwork.toMap());
-    return artwork.id == null
-        ? SavedArtwork(
-            id: id,
-            title: artwork.title,
-            imageUrl: artwork.imageUrl,
-            description: artwork.description,
-            savedAt: artwork.savedAt,
-          )
-        : artwork;
+    await db.insert(
+      'saved_artworks',
+      artwork.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace, // Reemplazar si ya existe
+    );
+    return artwork;
   }
 
   Future<List<SavedArtwork>> getAllSavedArtworks() async {
@@ -73,6 +78,16 @@ class DatabaseService {
       'saved_artworks',
       where: 'title = ?',
       whereArgs: [title],
+    );
+  }
+
+  // Método adicional para eliminar por ID
+  Future<int> deleteArtworkById(String id) async {
+    final db = await instance.database;
+    return await db.delete(
+      'saved_artworks',
+      where: 'id = ?',
+      whereArgs: [id],
     );
   }
 }

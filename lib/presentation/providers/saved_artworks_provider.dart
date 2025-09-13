@@ -37,6 +37,7 @@ class SavedArtworksProvider extends ChangeNotifier {
   Future<void> saveArtwork(Artwork artwork) async {
     try {
       final savedArtwork = SavedArtwork(
+        id: artwork.id, // Usar el mismo ID del Artwork
         title: artwork.title,
         imageUrl: artwork.imageUrl,
         description: artwork.description ?? '',

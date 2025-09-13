@@ -203,11 +203,23 @@ class _SavedScreenState extends State<SavedScreen> {
                       context,
                       AppRoutes.artworkDetail,
                       arguments: {
-                        'id': artwork.title, // Usar title como ID temporal
+                        'id': artwork
+                            .id, // Ahora artwork.id es String, consistente
                         'title': artwork.title,
                         'imageUrl': artwork.imageUrl,
                         'description': artwork.description,
-                        'relatedArtworks': const [],
+                        'relatedArtworks': const [
+                          {
+                            'imageUrl':
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg',
+                            'title': 'Chaffinch',
+                          },
+                          {
+                            'imageUrl':
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg',
+                            'title': 'The Milkmaid',
+                          },
+                        ],
                       },
                     );
                   },

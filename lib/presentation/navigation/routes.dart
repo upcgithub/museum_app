@@ -18,13 +18,21 @@ class AppRoutes {
         );
       case artworkDetail:
         final args = settings.arguments as Map<String, dynamic>;
+
+        // Manejo seguro de relatedArtworks
+        List<Map<String, dynamic>> relatedArtworks = [];
+        if (args['relatedArtworks'] != null) {
+          final rawList = args['relatedArtworks'] as List<dynamic>;
+          relatedArtworks = rawList.cast<Map<String, dynamic>>();
+        }
+
         return MaterialPageRoute(
           builder: (_) => ArtworkDetailScreen(
-            id: args['id'],
-            title: args['title'],
-            imageUrl: args['imageUrl'],
-            description: args['description'],
-            relatedArtworks: args['relatedArtworks'],
+            id: args['id'] ?? '',
+            title: args['title'] ?? 'Unknown Title',
+            imageUrl: args['imageUrl'] ?? '',
+            description: args['description'] ?? '',
+            relatedArtworks: relatedArtworks,
             isViewed: args['isViewed'] ?? false,
           ),
         );
