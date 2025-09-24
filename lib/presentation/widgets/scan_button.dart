@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
 import 'package:museum_app/presentation/providers/museum_provider.dart';
+import 'package:museum_app/presentation/screens/scanner/qr_scanner_screen.dart';
 import 'package:provider/provider.dart';
 
 class ScanButton extends StatelessWidget {
@@ -26,14 +26,15 @@ class ScanButton extends StatelessWidget {
 
   Future<void> _handleScan(BuildContext context) async {
     try {
-      final barcodeProdResult = await FlutterBarcodeScanner.scanBarcode(
-        '#3D8BEF',
-        'Cancelar',
-        false,
-        ScanMode.QR,
+      // Navigate to scanner screen and wait for result
+      final String? barcodeProdResult = await Navigator.push<String>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const QRScannerScreen(),
+        ),
       );
 
-      if (barcodeProdResult == '-1') return;
+      if (barcodeProdResult == null || barcodeProdResult.isEmpty) return;
 
       // Extraer el tipo y el ID en una sola operación
       final parts = barcodeProdResult.split('/');
