@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/domain/entities/artwork.dart';
@@ -22,12 +23,13 @@ class _ArtworksScreenState extends State<ArtworksScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'Artworks',
-          style: TextStyle(
+        title: Text(
+          l10n.artworks,
+          style: const TextStyle(
             fontFamily: 'Playfair',
             fontWeight: FontWeight.w700,
             color: Colors.black,
@@ -48,10 +50,10 @@ class _ArtworksScreenState extends State<ArtworksScreen> {
           }
 
           if (provider.allArtworks.isEmpty) {
-            return const Center(
+            return Center(
               child: Text(
-                'No artworks found',
-                style: TextStyle(
+                l10n.noArtworksFound,
+                style: const TextStyle(
                   fontFamily: 'Urbanist',
                   fontSize: 16,
                 ),

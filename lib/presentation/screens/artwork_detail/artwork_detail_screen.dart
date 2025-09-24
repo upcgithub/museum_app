@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/saved_artworks_provider.dart';
 import 'package:museum_app/domain/entities/artwork.dart';
@@ -113,6 +114,7 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
   }
 
   Future<void> _toggleSave(SavedArtworksProvider provider) async {
+    final l10n = AppLocalizations.of(context)!;
     final artwork = Artwork(
       id: widget.id,
       title: widget.title,
@@ -131,8 +133,8 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
         SnackBar(
           content: Text(
             isNowSaved
-                ? '${widget.title} saved to your collection'
-                : '${widget.title} removed from your collection',
+                ? l10n.artworkSavedToCollection(widget.title)
+                : l10n.artworkRemovedFromSaved(widget.title),
             style: const TextStyle(
               fontFamily: 'Urbanist',
               fontWeight: FontWeight.w500,
@@ -152,6 +154,7 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Consumer<SavedArtworksProvider>(
       builder: (context, savedProvider, child) {
         final isSaved = savedProvider.isArtworkSaved(widget.title);
@@ -249,7 +252,7 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
                                   });
                                 },
                                 child: Text(
-                                  _isExpanded ? 'Read less' : 'Read more',
+                                  _isExpanded ? l10n.readLess : l10n.readMore,
                                   style: const TextStyle(
                                     fontFamily: 'Urbanist',
                                     fontWeight: FontWeight.w600,
@@ -259,9 +262,9 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            const Text(
-                              'Related to this artwork',
-                              style: TextStyle(
+                            Text(
+                              l10n.relatedToThisArtwork,
+                              style: const TextStyle(
                                 fontFamily: 'Playfair',
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
@@ -356,9 +359,9 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
                         color: Colors.black.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: const Text(
-                        'Viewed',
-                        style: TextStyle(
+                      child: Text(
+                        l10n.viewed,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                         ),

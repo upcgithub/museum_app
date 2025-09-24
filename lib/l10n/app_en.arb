@@ -17,5 +17,84 @@
     "logout": "Logout",
     "logoutConfirmation": "Are you sure you want to logout?",
     "cancel": "Cancel",
-    "artQuote": "Art enables us to find ourselves and lose ourselves at the same time."
+    "artQuote": "Art enables us to find ourselves and lose ourselves at the same time.",
+    
+    "@home": {},
+    "@profile": {},
+    "@settings": {},
+    "@tickets": {},
+    "@savedArtworks": {},
+    "@exhibitions": {},
+    "@qrScans": {},
+    "@editProfile": {},
+    "@languagePreferences": {},
+    "@accessibilitySettings": {},
+    "@notificationSettings": {},
+    "@logout": {},
+    "@logoutConfirmation": {},
+    "@cancel": {},
+    "@artQuote": {},
+    
+    "location": "Location",
+    "limaPeru": "Lima, Peru",
+    "searchExhibitionsEvents": "Search exhibitions, events...",
+    "exhibition": "Exhibition",
+    "events": "Events",
+    "artwork": "Artwork",
+    "artist": "Artist",
+    "popular": "Popular",
+    "viewAll": "View All",
+    "whatsNew": "What's new",
+    "artworks": "Artworks",
+    "noArtworksFound": "No artworks found",
+    "loadingSavedArtworks": "Loading saved artworks...",
+    "retry": "Retry",
+    "noSavedArtworksYet": "No saved artworks yet",
+    "startExploringAndSave": "Start exploring and save your favorite artworks!",
+    "remove": "Remove",
+    "removeFromSaved": "Remove from Saved",
+    "areYouSureRemove": "Are you sure you want to remove \"{artworkTitle}\" from your saved artworks?",
+    "@areYouSureRemove": {
+        "placeholders": {
+            "artworkTitle": {
+                "type": "String"
+            }
+        }
+    },
+    "artworkRemovedFromSaved": "{artworkTitle} removed from saved",
+    "@artworkRemovedFromSaved": {
+        "placeholders": {
+            "artworkTitle": {
+                "type": "String"
+            }
+        }
+    },
+    "artworkSavedToCollection": "{artworkTitle} saved to your collection",
+    "@artworkSavedToCollection": {
+        "placeholders": {
+            "artworkTitle": {
+                "type": "String"
+            }
+        }
+    },
+    "undo": "Undo",
+    "undoFunctionalityComingSoon": "Undo functionality coming soon!",
+    "savedOn": "Saved on {date}",
+    "@savedOn": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "ticketsScreen": "Tickets Screen",
+    "playAudio": "Play Audio",
+    "pauseAudio": "Pause Audio",
+    "relatedArtworks": "Related Artworks",
+    "saveArtwork": "Save Artwork",
+    "removeFromSavedArtworks": "Remove from Saved Artworks",
+    "readMore": "Read more",
+    "readLess": "Read less",
+    "relatedToThisArtwork": "Related to this artwork",
+    "viewed": "Viewed"
 } 

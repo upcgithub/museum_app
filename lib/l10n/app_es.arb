@@ -6,7 +6,6 @@
     "premiumMember": "Miembro Premium",
     "profileName": "Jane Doe",
     "profileEmail": "jane.doe@example.com",
-    "premiumMember": "Miembro Premium",
     "savedArtworks": "Obras Guardadas",
     "tickets": "Entradas",
     "exhibitions": "Exposiciones",
@@ -18,6 +17,84 @@
     "logout": "Cerrar Sesión",
     "logoutConfirmation": "¿Estás seguro de que quieres cerrar sesión?",
     "cancel": "Cancelar",
-    "artQuote": "El arte nos permite encontrarnos y perdernos al mismo tiempo."
-
-} 
+    "artQuote": "El arte nos permite encontrarnos y perdernos al mismo tiempo.",
+    
+    "@home": {},
+    "@profile": {},
+    "@settings": {},
+    "@tickets": {},
+    "@savedArtworks": {},
+    "@exhibitions": {},
+    "@qrScans": {},
+    "@editProfile": {},
+    "@languagePreferences": {},
+    "@accessibilitySettings": {},
+    "@notificationSettings": {},
+    "@logout": {},
+    "@logoutConfirmation": {},
+    "@cancel": {},
+    "@artQuote": {},
+    
+    "location": "Ubicación",
+    "limaPeru": "Lima, Perú",
+    "searchExhibitionsEvents": "Buscar exposiciones, eventos...",
+    "exhibition": "Exposición",
+    "events": "Eventos",
+    "artwork": "Obra de Arte",
+    "artist": "Artista",
+    "popular": "Popular",
+    "viewAll": "Ver Todo",
+    "whatsNew": "Novedades",
+    "artworks": "Obras de Arte",
+    "noArtworksFound": "No se encontraron obras de arte",
+    "loadingSavedArtworks": "Cargando obras guardadas...",
+    "retry": "Reintentar",
+    "noSavedArtworksYet": "Aún no hay obras guardadas",
+    "startExploringAndSave": "¡Comienza a explorar y guarda tus obras favoritas!",
+    "remove": "Eliminar",
+    "removeFromSaved": "Eliminar de Guardados",
+    "areYouSureRemove": "¿Estás seguro de que quieres eliminar \"{artworkTitle}\" de tus obras guardadas?",
+    "@areYouSureRemove": {
+        "placeholders": {
+            "artworkTitle": {
+                "type": "String"
+            }
+        }
+    },
+    "artworkRemovedFromSaved": "{artworkTitle} eliminada de guardados",
+    "@artworkRemovedFromSaved": {
+        "placeholders": {
+            "artworkTitle": {
+                "type": "String"
+            }
+        }
+    },
+    "artworkSavedToCollection": "{artworkTitle} guardada en tu colección",
+    "@artworkSavedToCollection": {
+        "placeholders": {
+            "artworkTitle": {
+                "type": "String"
+            }
+        }
+    },
+    "undo": "Deshacer",
+    "undoFunctionalityComingSoon": "¡La funcionalidad de deshacer llegará pronto!",
+    "savedOn": "Guardado el {date}",
+    "@savedOn": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "ticketsScreen": "Pantalla de Entradas",
+    "playAudio": "Reproducir Audio",
+    "pauseAudio": "Pausar Audio",
+    "relatedArtworks": "Obras Relacionadas",
+    "saveArtwork": "Guardar Obra",
+    "removeFromSavedArtworks": "Eliminar de Obras Guardadas",
+    "readMore": "Leer más",
+    "readLess": "Leer menos",
+    "relatedToThisArtwork": "Relacionado con esta obra",
+    "viewed": "Visto"
+}

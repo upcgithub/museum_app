@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/saved_artworks_provider.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
@@ -26,11 +27,12 @@ class _SavedScreenState extends State<SavedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Saved Artworks',
-          style: TextStyle(
+        title: Text(
+          l10n.savedArtworks,
+          style: const TextStyle(
             fontFamily: 'Playfair',
             fontWeight: FontWeight.w600,
           ),
@@ -49,15 +51,15 @@ class _SavedScreenState extends State<SavedScreen> {
         builder: (context, provider, child) {
           // Estado de carga
           if (provider.isLoading) {
-            return const Center(
+            return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(
+                  const CircularProgressIndicator(
                     color: Color(0xFFA69365),
                   ),
-                  SizedBox(height: 16),
-                  Text('Loading saved artworks...'),
+                  const SizedBox(height: 16),
+                  Text(l10n.loadingSavedArtworks),
                 ],
               ),
             );
@@ -83,7 +85,7 @@ class _SavedScreenState extends State<SavedScreen> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => provider.loadSavedArtworks(),
-                    child: const Text('Retry'),
+                    child: Text(l10n.retry),
                   ),
                 ],
               ),
@@ -92,28 +94,28 @@ class _SavedScreenState extends State<SavedScreen> {
 
           // Lista vacía
           if (provider.savedArtworks.isEmpty) {
-            return const Center(
+            return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.bookmark_border,
                     size: 64,
                     color: Colors.grey,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
-                    'No saved artworks yet',
-                    style: TextStyle(
+                    l10n.noSavedArtworksYet,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontFamily: 'Playfair',
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
-                    'Start exploring and save your favorite artworks!',
-                    style: TextStyle(
+                    l10n.startExploringAndSave,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontFamily: 'Urbanist',
                       color: Colors.grey,
@@ -151,7 +153,7 @@ class _SavedScreenState extends State<SavedScreen> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Remove',
+                        l10n.remove,
                         style: TextStyle(
                           color: AppColors.error,
                           fontSize: 12,
@@ -174,7 +176,7 @@ class _SavedScreenState extends State<SavedScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          '${artwork.title} removed from saved',
+                          l10n.artworkRemovedFromSaved(artwork.title),
                           style: const TextStyle(
                             fontFamily: 'Urbanist',
                             fontWeight: FontWeight.w500,
@@ -187,16 +189,16 @@ class _SavedScreenState extends State<SavedScreen> {
                         ),
                         margin: const EdgeInsets.all(16),
                         action: SnackBarAction(
-                          label: 'Undo',
+                          label: l10n.undo,
                           textColor: Colors.white,
                           backgroundColor: Colors.white.withOpacity(0.2),
                           onPressed: () {
                             // TODO: Implementar undo functionality
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: const Text(
-                                  'Undo functionality coming soon!',
-                                  style: TextStyle(
+                                content: Text(
+                                  l10n.undoFunctionalityComingSoon,
+                                  style: const TextStyle(
                                     fontFamily: 'Urbanist',
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -218,6 +220,7 @@ class _SavedScreenState extends State<SavedScreen> {
                 },
                 child: SavedArtworkCard(
                   artwork: artwork,
+                  l10n: l10n,
                   onTap: () {
                     Navigator.pushNamed(
                       context,
@@ -254,7 +257,7 @@ class _SavedScreenState extends State<SavedScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              '${artwork.title} removed from saved',
+                              l10n.artworkRemovedFromSaved(artwork.title),
                               style: const TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w500,
@@ -281,6 +284,7 @@ class _SavedScreenState extends State<SavedScreen> {
   }
 
   Future<bool?> _showRemoveDialog(BuildContext context, String artworkTitle) {
+    final l10n = AppLocalizations.of(context)!;
     return showDialog<bool>(
       context: context,
       barrierDismissible: true,
@@ -296,9 +300,9 @@ class _SavedScreenState extends State<SavedScreen> {
               size: 24,
             ),
             const SizedBox(width: 8),
-            const Text(
-              'Remove from Saved',
-              style: TextStyle(
+            Text(
+              l10n.removeFromSaved,
+              style: const TextStyle(
                 fontFamily: 'Playfair',
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -314,15 +318,7 @@ class _SavedScreenState extends State<SavedScreen> {
               fontFamily: 'Urbanist',
             ),
             children: [
-              const TextSpan(text: 'Are you sure you want to remove '),
-              TextSpan(
-                text: '"$artworkTitle"',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Playfair',
-                ),
-              ),
-              const TextSpan(text: ' from your saved artworks?'),
+              TextSpan(text: l10n.areYouSureRemove(artworkTitle)),
             ],
           ),
         ),
@@ -330,7 +326,7 @@ class _SavedScreenState extends State<SavedScreen> {
           TextButton(
             onPressed: () => Navigator.pop(context, false),
             child: Text(
-              'Cancel',
+              l10n.cancel,
               style: TextStyle(
                 color: Colors.grey[600],
                 fontFamily: 'Urbanist',
@@ -348,9 +344,9 @@ class _SavedScreenState extends State<SavedScreen> {
               ),
               elevation: 0,
             ),
-            child: const Text(
-              'Remove',
-              style: TextStyle(
+            child: Text(
+              l10n.remove,
+              style: const TextStyle(
                 fontFamily: 'Urbanist',
                 fontWeight: FontWeight.w600,
               ),
@@ -364,12 +360,14 @@ class _SavedScreenState extends State<SavedScreen> {
 
 class SavedArtworkCard extends StatelessWidget {
   final dynamic artwork; // SavedArtwork
+  final AppLocalizations l10n;
   final VoidCallback onTap;
   final VoidCallback onBookmarkToggle;
 
   const SavedArtworkCard({
     Key? key,
     required this.artwork,
+    required this.l10n,
     required this.onTap,
     required this.onBookmarkToggle,
   }) : super(key: key);
@@ -429,7 +427,8 @@ class SavedArtworkCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Saved on ${artwork.savedAt.day}/${artwork.savedAt.month}/${artwork.savedAt.year}',
+                      l10n.savedOn(
+                          '${artwork.savedAt.day}/${artwork.savedAt.month}/${artwork.savedAt.year}'),
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 12,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../l10n/app_localizations.dart';
 import 'package:museum_app/presentation/providers/museum_provider.dart';
 import 'package:museum_app/presentation/widgets/artwork_card.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildHeader() {
+    final l10n = AppLocalizations.of(context)!;
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -48,14 +50,14 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Image.asset('assets/logo.png', height: 40),
             const Spacer(),
-            const Column(
+            Column(
               children: [
                 Row(
                   children: [
-                    Icon(Icons.location_on_outlined),
+                    const Icon(Icons.location_on_outlined),
                     Text(
-                      'Location',
-                      style: TextStyle(
+                      l10n.location,
+                      style: const TextStyle(
                         fontFamily: 'Playfair',
                         fontWeight: FontWeight.w700,
                       ),
@@ -63,8 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 Text(
-                  'Lima, Peru',
-                  style: TextStyle(
+                  l10n.limaPeru,
+                  style: const TextStyle(
                     fontFamily: 'Playfair',
                     fontWeight: FontWeight.w500,
                   ),
@@ -83,12 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildSearchBar() {
+    final l10n = AppLocalizations.of(context)!;
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24),
         child: TextField(
           decoration: InputDecoration(
-            hintText: 'Search exhibitions, events...',
+            hintText: l10n.searchExhibitionsEvents,
             hintStyle: TextStyle(
               color: Colors.grey[400],
               fontSize: 14,
@@ -118,11 +121,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCategories() {
+    final l10n = AppLocalizations.of(context)!;
     final categories = [
-      {'icon': Icons.museum_outlined, 'label': 'Exhibition'},
-      {'icon': Icons.event_outlined, 'label': 'Events'},
-      {'icon': Icons.palette_outlined, 'label': 'Artwork'},
-      {'icon': Icons.person_outline, 'label': 'Artist'},
+      {'icon': Icons.museum_outlined, 'label': l10n.exhibition},
+      {'icon': Icons.event_outlined, 'label': l10n.events},
+      {'icon': Icons.palette_outlined, 'label': l10n.artwork},
+      {'icon': Icons.person_outline, 'label': l10n.artist},
     ];
 
     return SliverToBoxAdapter(
@@ -131,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: categories
             .map((category) => GestureDetector(
                   onTap: () {
-                    if (category['label'] == 'Artwork') {
+                    if (category['label'] == l10n.artwork) {
                       Navigator.pushNamed(context, AppRoutes.artworks);
                     }
                   },
@@ -166,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildPopularSection() {
     return Consumer<MuseumProvider>(
       builder: (context, provider, child) {
+        final l10n = AppLocalizations.of(context)!;
         if (provider.isLoading) {
           return const SliverToBoxAdapter(
             child: Center(child: CircularProgressIndicator()),
@@ -183,9 +188,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Popular",
-                    style: TextStyle(
+                  Text(
+                    l10n.popular,
+                    style: const TextStyle(
                       fontFamily: 'Playfair',
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
@@ -195,9 +200,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       // Implementar navegación a la vista completa
                     },
-                    child: const Text(
-                      'View All',
-                      style: TextStyle(
+                    child: Text(
+                      l10n.viewAll,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontFamily: 'Urbanist',
                         fontWeight: FontWeight.w600,
@@ -255,6 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildWhatsNewSection() {
     return Consumer<MuseumProvider>(
       builder: (context, provider, child) {
+        final l10n = AppLocalizations.of(context)!;
         return SliverList(
           delegate: SliverChildListDelegate([
             Padding(
@@ -267,9 +273,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "What's new",
-                    style: TextStyle(
+                  Text(
+                    l10n.whatsNew,
+                    style: const TextStyle(
                       fontFamily: 'Playfair',
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
@@ -279,9 +285,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       // Implementar navegación a la vista completa
                     },
-                    child: const Text(
-                      'View All',
-                      style: TextStyle(
+                    child: Text(
+                      l10n.viewAll,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontFamily: 'Urbanist',
                         fontWeight: FontWeight.w600,

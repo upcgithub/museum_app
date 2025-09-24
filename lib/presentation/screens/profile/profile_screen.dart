@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:museum_app/core/theme/app_text_styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
+import 'package:museum_app/presentation/widgets/language_selector.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -253,6 +254,7 @@ class SettingsSection extends StatelessWidget {
         SettingTile(
           icon: Icons.language,
           title: l10n.languagePreferences,
+          onTap: () => _showLanguageSelector(context),
         ),
         SettingTile(
           icon: Icons.accessibility_new,
@@ -265,16 +267,41 @@ class SettingsSection extends StatelessWidget {
       ],
     );
   }
+
+  void _showLanguageSelector(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withValues(alpha: 0.1),
+              blurRadius: 20,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
+        child: const LanguageSelector(),
+      ),
+    );
+  }
 }
 
 class SettingTile extends StatelessWidget {
   final IconData icon;
   final String title;
+  final VoidCallback? onTap;
 
   const SettingTile({
     Key? key,
     required this.icon,
     required this.title,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -296,7 +323,7 @@ class SettingTile extends StatelessWidget {
         ),
       ),
       trailing: const Icon(Icons.chevron_right),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }
