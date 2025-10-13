@@ -5,7 +5,6 @@ import 'package:museum_app/presentation/screens/tickets/tickets_screen.dart';
 import 'package:museum_app/presentation/screens/saved/saved_screen.dart';
 import 'package:museum_app/presentation/screens/profile/profile_screen.dart';
 import 'package:museum_app/presentation/widgets/scan_button.dart';
-import 'package:museum_app/presentation/navigation/routes.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});

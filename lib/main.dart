@@ -1,21 +1,37 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:museum_app/core/services/database_service.dart';
 import 'package:museum_app/core/services/supabase_config.dart';
+import 'package:museum_app/core/services/gemini_service.dart';
 import 'package:museum_app/presentation/providers/saved_artworks_provider.dart';
 import 'package:museum_app/presentation/providers/auth_provider.dart';
+import 'package:museum_app/presentation/providers/gemini_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/app.dart';
 import 'package:museum_app/core/dependency_injection/service_locator.dart';
 import 'package:museum_app/presentation/providers/museum_provider.dart';
 import 'package:museum_app/presentation/providers/language_provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  log('🚀 App: Starting Culture Connect app...');
   WidgetsFlutterBinding.ensureInitialized();
+  log('✅ App: Flutter binding initialized');
+
+  // Load environment variables
+  log('📄 App: Loading .env file...');
+  await dotenv.load(fileName: '.env');
+  log('✅ App: Environment variables loaded');
+  log('   GEMINI_API_KEY present: ${dotenv.env.containsKey('GEMINI_API_KEY')}');
 
   // Inicializar Supabase
+  log('🔧 App: Initializing Supabase...');
   await SupabaseConfig.initialize();
+  log('✅ App: Supabase initialized');
 
+  log('🔧 App: Setting up service locator...');
   setupServiceLocator();
+  log('✅ App: Service locator setup complete');
 
   runApp(
     MultiProvider(
@@ -55,8 +71,19 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => SavedArtworksProvider(getIt<DatabaseService>()),
         ),
+        ChangeNotifierProvider(
+          create: (_) {
+            log('🎨 App: Creating GeminiProvider...');
+            final service = GeminiService();
+            final provider = GeminiProvider(service);
+            log('✅ App: GeminiProvider created');
+            return provider;
+          },
+        ),
       ],
       child: const MuseumApp(),
     ),
   );
+
+  log('🎉 App: All providers initialized, app running!');
 }

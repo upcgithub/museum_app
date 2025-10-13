@@ -589,6 +589,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Theater'**
   String get captchaTheaterLabel;
+
+  /// No description provided for @aiFeaturesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Features'**
+  String get aiFeaturesTitle;
+
+  /// No description provided for @playAudioGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Play Audio Guide'**
+  String get playAudioGuide;
+
+  /// No description provided for @playAudioGuideDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to narration about this artwork'**
+  String get playAudioGuideDesc;
+
+  /// No description provided for @chatWithArtist.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat with {artist}'**
+  String chatWithArtist(String artist);
+
+  /// No description provided for @chatWithArtistDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask questions about this artwork'**
+  String get chatWithArtistDesc;
+
+  /// No description provided for @stylizeYourPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Stylize Your Photo'**
+  String get stylizeYourPhoto;
+
+  /// No description provided for @stylizeYourPhotoDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Transform a photo in {artist}\'s style'**
+  String stylizeYourPhotoDesc(String artist);
+
+  /// No description provided for @sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send message'**
+  String get sendMessage;
+
+  /// No description provided for @typeYourQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your question...'**
+  String get typeYourQuestion;
+
+  /// No description provided for @applyingStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Applying {artist}\'s style...'**
+  String applyingStyle(String artist);
+
+  /// No description provided for @selectPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Photo'**
+  String get selectPhoto;
+
+  /// No description provided for @shareStylizedImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareStylizedImage;
+
+  /// No description provided for @downloadImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get downloadImage;
+
+  /// No description provided for @originalImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Original'**
+  String get originalImage;
+
+  /// No description provided for @stylizedImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Stylized'**
+  String get stylizedImage;
+
+  /// No description provided for @chatError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to send message. Please try again.'**
+  String get chatError;
+
+  /// No description provided for @styleTransferError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to stylize image. Please try again.'**
+  String get styleTransferError;
+
+  /// No description provided for @qrScannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'QR Scanner'**
+  String get qrScannerTitle;
+
+  /// No description provided for @qrScannerInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Point the camera at the artwork\'s\nQR code'**
+  String get qrScannerInstruction;
+
+  /// No description provided for @qrScannerKeepInArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep the code within\nthe scan area'**
+  String get qrScannerKeepInArea;
 }
 
 class _AppLocalizationsDelegate

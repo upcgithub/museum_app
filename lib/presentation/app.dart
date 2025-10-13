@@ -4,7 +4,6 @@ import 'package:museum_app/presentation/screens/auth/login_screen.dart';
 import '../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/language_provider.dart';
-import 'package:museum_app/presentation/navigation/main_navigation.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
 
 class MuseumApp extends StatelessWidget {

@@ -263,4 +263,71 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get captchaTheaterLabel => 'Theater';
+
+  @override
+  String get aiFeaturesTitle => 'AI Features';
+
+  @override
+  String get playAudioGuide => 'Play Audio Guide';
+
+  @override
+  String get playAudioGuideDesc => 'Listen to narration about this artwork';
+
+  @override
+  String chatWithArtist(String artist) {
+    return 'Chat with $artist';
+  }
+
+  @override
+  String get chatWithArtistDesc => 'Ask questions about this artwork';
+
+  @override
+  String get stylizeYourPhoto => 'Stylize Your Photo';
+
+  @override
+  String stylizeYourPhotoDesc(String artist) {
+    return 'Transform a photo in $artist\'s style';
+  }
+
+  @override
+  String get sendMessage => 'Send message';
+
+  @override
+  String get typeYourQuestion => 'Type your question...';
+
+  @override
+  String applyingStyle(String artist) {
+    return 'Applying $artist\'s style...';
+  }
+
+  @override
+  String get selectPhoto => 'Select Photo';
+
+  @override
+  String get shareStylizedImage => 'Share';
+
+  @override
+  String get downloadImage => 'Download';
+
+  @override
+  String get originalImage => 'Original';
+
+  @override
+  String get stylizedImage => 'Stylized';
+
+  @override
+  String get chatError => 'Failed to send message. Please try again.';
+
+  @override
+  String get styleTransferError => 'Failed to stylize image. Please try again.';
+
+  @override
+  String get qrScannerTitle => 'QR Scanner';
+
+  @override
+  String get qrScannerInstruction =>
+      'Point the camera at the artwork\'s\nQR code';
+
+  @override
+  String get qrScannerKeepInArea => 'Keep the code within\nthe scan area';
 }

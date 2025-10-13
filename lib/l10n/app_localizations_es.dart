@@ -265,4 +265,73 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get captchaTheaterLabel => 'Teatro';
+
+  @override
+  String get aiFeaturesTitle => 'Funciones de IA';
+
+  @override
+  String get playAudioGuide => 'Reproducir Guía de Audio';
+
+  @override
+  String get playAudioGuideDesc => 'Escucha la narración sobre esta obra';
+
+  @override
+  String chatWithArtist(String artist) {
+    return 'Conversa con $artist';
+  }
+
+  @override
+  String get chatWithArtistDesc => 'Haz preguntas sobre esta obra';
+
+  @override
+  String get stylizeYourPhoto => 'Estiliza tu Foto';
+
+  @override
+  String stylizeYourPhotoDesc(String artist) {
+    return 'Transforma una foto al estilo de $artist';
+  }
+
+  @override
+  String get sendMessage => 'Enviar mensaje';
+
+  @override
+  String get typeYourQuestion => 'Escribe tu pregunta...';
+
+  @override
+  String applyingStyle(String artist) {
+    return 'Aplicando el estilo de $artist...';
+  }
+
+  @override
+  String get selectPhoto => 'Seleccionar Foto';
+
+  @override
+  String get shareStylizedImage => 'Compartir';
+
+  @override
+  String get downloadImage => 'Descargar';
+
+  @override
+  String get originalImage => 'Original';
+
+  @override
+  String get stylizedImage => 'Estilizada';
+
+  @override
+  String get chatError => 'Error al enviar mensaje. Inténtalo de nuevo.';
+
+  @override
+  String get styleTransferError =>
+      'Error al estilizar imagen. Inténtalo de nuevo.';
+
+  @override
+  String get qrScannerTitle => 'Escáner QR';
+
+  @override
+  String get qrScannerInstruction =>
+      'Apunta la cámara hacia el código QR\nde la obra de arte';
+
+  @override
+  String get qrScannerKeepInArea =>
+      'Mantén el código dentro\ndel área de escaneo';
 }

@@ -231,6 +231,7 @@ class _SavedScreenState extends State<SavedScreen> {
                         'title': artwork.title,
                         'imageUrl': artwork.imageUrl,
                         'description': artwork.description,
+                        'artist': artwork.artist,
                         'relatedArtworks': const [
                           {
                             'imageUrl':

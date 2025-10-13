@@ -36,6 +36,7 @@ class AppRoutes {
             description: args['description'] ?? '',
             relatedArtworks: relatedArtworks,
             isViewed: args['isViewed'] ?? false,
+            artist: args['artist'],
           ),
         );
       case saved:

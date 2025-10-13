@@ -125,5 +125,46 @@
     "captchaReset": "Try a different sequence",
     "captchaMuseumLabel": "Museum",
     "captchaPaletteLabel": "Palette",
-    "captchaTheaterLabel": "Theater"
+    "captchaTheaterLabel": "Theater",
+    "aiFeaturesTitle": "AI Features",
+    "playAudioGuide": "Play Audio Guide",
+    "playAudioGuideDesc": "Listen to narration about this artwork",
+    "chatWithArtist": "Chat with {artist}",
+    "@chatWithArtist": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "chatWithArtistDesc": "Ask questions about this artwork",
+    "stylizeYourPhoto": "Stylize Your Photo",
+    "stylizeYourPhotoDesc": "Transform a photo in {artist}'s style",
+    "@stylizeYourPhotoDesc": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "sendMessage": "Send message",
+    "typeYourQuestion": "Type your question...",
+    "applyingStyle": "Applying {artist}'s style...",
+    "@applyingStyle": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "selectPhoto": "Select Photo",
+    "shareStylizedImage": "Share",
+    "downloadImage": "Download",
+    "originalImage": "Original",
+    "stylizedImage": "Stylized",
+    "chatError": "Failed to send message. Please try again.",
+    "styleTransferError": "Failed to stylize image. Please try again.",
+    "qrScannerTitle": "QR Scanner",
+    "qrScannerInstruction": "Point the camera at the artwork's\nQR code",
+    "qrScannerKeepInArea": "Keep the code within\nthe scan area"
 } 

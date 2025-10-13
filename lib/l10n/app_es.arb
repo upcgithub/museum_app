@@ -125,5 +125,46 @@
     "captchaReset": "Probar con otra secuencia",
     "captchaMuseumLabel": "Museo",
     "captchaPaletteLabel": "Paleta",
-    "captchaTheaterLabel": "Teatro"
+    "captchaTheaterLabel": "Teatro",
+    "aiFeaturesTitle": "Funciones de IA",
+    "playAudioGuide": "Reproducir Guía de Audio",
+    "playAudioGuideDesc": "Escucha la narración sobre esta obra",
+    "chatWithArtist": "Conversa con {artist}",
+    "@chatWithArtist": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "chatWithArtistDesc": "Haz preguntas sobre esta obra",
+    "stylizeYourPhoto": "Estiliza tu Foto",
+    "stylizeYourPhotoDesc": "Transforma una foto al estilo de {artist}",
+    "@stylizeYourPhotoDesc": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "sendMessage": "Enviar mensaje",
+    "typeYourQuestion": "Escribe tu pregunta...",
+    "applyingStyle": "Aplicando el estilo de {artist}...",
+    "@applyingStyle": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "selectPhoto": "Seleccionar Foto",
+    "shareStylizedImage": "Compartir",
+    "downloadImage": "Descargar",
+    "originalImage": "Original",
+    "stylizedImage": "Estilizada",
+    "chatError": "Error al enviar mensaje. Inténtalo de nuevo.",
+    "styleTransferError": "Error al estilizar imagen. Inténtalo de nuevo.",
+    "qrScannerTitle": "Escáner QR",
+    "qrScannerInstruction": "Apunta la cámara hacia el código QR\nde la obra de arte",
+    "qrScannerKeepInArea": "Mantén el código dentro\ndel área de escaneo"
 }

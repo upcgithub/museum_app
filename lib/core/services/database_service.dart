@@ -31,6 +31,7 @@ class DatabaseService {
       CREATE TABLE saved_artworks(
         id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
+        artist TEXT NOT NULL,
         imageUrl TEXT NOT NULL,
         description TEXT NOT NULL,
         savedAt TEXT NOT NULL

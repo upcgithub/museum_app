@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewPadding = MediaQuery.paddingOf(context);
     final l10n = AppLocalizations.of(context)!;
-    final textTheme = Theme.of(context).textTheme;
+    // final textTheme = Theme.of(context).textTheme;
 
     return ChangeNotifierProvider(
       create: (_) => LoginProvider(),
