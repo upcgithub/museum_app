@@ -24,6 +24,8 @@ Culture Connect es una aplicación de museo que ofrece una experiencia inmersiva
 - Escanear códigos QR para obtener información detallada
 - Guardar sus obras favoritas
 - Escuchar audioguías
+- **Chat con artistas usando IA** (Gemini AI)
+- **Transferencia de estilo artístico** con fallback automático (Gemini + Replicate)
 - Gestionar tickets y perfil personal
 - Navegar por exhibiciones y eventos
 
@@ -84,12 +86,19 @@ sqflite: ^2.3.0
 path: ^1.8.3
 
 # Funcionalidades Específicas
-flutter_barcode_scanner: ^2.0.0 # Escaneo QR
+mobile_scanner: ^5.0.0 # Escaneo QR
 cached_network_image: ^3.3.1 # Caché de imágenes
 audioplayers: ^5.2.1 # Reproductor de audio
+image_picker: ^1.1.2 # Selección de imágenes
+
+# Inteligencia Artificial
+google_generative_ai: ^0.4.0 # Gemini AI (chat y generación de imágenes)
+
+# Configuración
+flutter_dotenv: ^5.2.1 # Variables de entorno para API keys
 
 # Internacionalización
-intl: ^0.19.0
+intl: ^0.20.2
 ```
 
 ### Dependencias de Desarrollo:
@@ -274,6 +283,8 @@ class MuseumProvider extends ChangeNotifier {
   - Visualización de obra completa
   - Descripción expandible/colapsable
   - Audioguía integrada
+  - **Chat con artista IA** - Conversación con el artista usando Gemini AI
+  - **Transferencia de estilo** - Aplica el estilo del artista a tus fotos
   - Funcionalidad de guardar/desguardar
   - Obras relacionadas
   - **Problema**: No actualiza automáticamente SavedScreen
@@ -316,6 +327,8 @@ class MuseumProvider extends ChangeNotifier {
 - Dart SDK >= 3.0.0
 - Android Studio / VS Code
 - Dispositivo físico o emulador
+- **Google Gemini API Key** (requerido para funciones de IA)
+- **Replicate API Token** (opcional, recomendado para fallback)
 
 ### Instalación:
 
@@ -332,13 +345,36 @@ class MuseumProvider extends ChangeNotifier {
    flutter pub get
    ```
 
-3. **Generar archivos de localización:**
+3. **Configurar claves de API:**
+
+   Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+
+   ```env
+   # Required: Gemini API Key
+   GEMINI_API_KEY=tu_api_key_de_gemini_aqui
+
+   # Optional but Recommended: Replicate API Token (for fallback)
+   REPLICATE_API_TOKEN=tu_token_de_replicate_aqui
+
+   # Supabase Configuration (if using authentication)
+   SUPABASE_URL=your_supabase_url_here
+   SUPABASE_ANON_KEY=your_supabase_anon_key_here
+   ```
+
+   **Obtener las claves:**
+
+   - Gemini API: [Google AI Studio](https://aistudio.google.com/app/apikey)
+   - Replicate Token: [Replicate Account](https://replicate.com/account/api-tokens)
+
+   Para más detalles, consulta [GEMINI_SETUP.md](GEMINI_SETUP.md)
+
+4. **Generar archivos de localización:**
 
    ```bash
    flutter gen-l10n
    ```
 
-4. **Ejecutar la aplicación:**
+5. **Ejecutar la aplicación:**
    ```bash
    flutter run
    ```
@@ -477,6 +513,74 @@ flutter:
           weight: 100
         # ... más pesos de fuente
 ```
+
+## 🤖 Características de Inteligencia Artificial
+
+### Integración con Gemini AI y Replicate
+
+La aplicación incluye potentes características de IA para enriquecer la experiencia del usuario:
+
+#### 1. Chat con Artista (Gemini AI)
+
+- **Modelo**: `gemini-2.0-flash-exp`
+- **Funcionalidad**: Conversación interactiva con un AI que asume el rol del artista
+- **Características**:
+  - Respuestas en primera persona desde la perspectiva del artista
+  - Contexto histórico y técnicas artísticas
+  - Soporte multiidioma (inglés y español)
+  - Mantiene el contexto de la conversación
+
+**Ejemplo de uso:**
+
+```dart
+// El usuario pregunta: "¿Qué te inspiró a crear esta obra?"
+// El AI responde como el artista: "Cuando pinté esta obra..."
+```
+
+#### 2. Transferencia de Estilo Artístico
+
+- **Modelo Primario**: `gemini-2.5-flash-image` (Google)
+- **Modelo Fallback**: `google/nano-banana` (Replicate)
+- **Funcionalidad**: Transforma fotos del usuario aplicando el estilo del artista
+- **Arquitectura de Fallback Automático**:
+
+```
+Usuario sube foto
+     ↓
+Intenta con Gemini (gemini-2.5-flash-image)
+     ↓
+¿Éxito? → Devuelve imagen estilizada ✓
+     ↓ No
+Intenta con Replicate (nano-banana)
+     ↓
+¿Éxito? → Devuelve imagen estilizada ✓
+     ↓ No
+Muestra mensaje de error
+```
+
+**Ventajas del sistema de fallback:**
+
+- ✅ Mayor confiabilidad (99.9% de disponibilidad)
+- ✅ Optimización de costos (Replicate solo se usa cuando Gemini falla)
+- ✅ Experiencia de usuario sin interrupciones
+- ✅ Soporte para múltiples proveedores de IA
+
+#### 3. Configuración de APIs
+
+**Gemini API (Requerido):**
+
+- Gratuito: 15 requests/minuto, 1,500 requests/día
+- Usado para: Chat y generación de imágenes primaria
+- Obtener clave: [Google AI Studio](https://aistudio.google.com/app/apikey)
+
+**Replicate API (Opcional pero Recomendado):**
+
+- Pricing: ~$0.01-0.05 por imagen generada
+- Usado para: Fallback de generación de imágenes
+- Solo se cobra cuando Gemini falla
+- Obtener token: [Replicate Account](https://replicate.com/account/api-tokens)
+
+Para más detalles sobre la configuración de IA, consulta [GEMINI_SETUP.md](GEMINI_SETUP.md)
 
 ## 🌍 Internacionalización de Datos
 

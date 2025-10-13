@@ -104,10 +104,16 @@ class LoginProvider extends ChangeNotifier {
   Future<bool> performLoginWithAuthProvider(AuthProvider authProvider) async {
     if (!_credentialsAreValid) return false;
 
-    return await authProvider.signInWithEmailAndPassword(
+    _error = null;
+    notifyListeners();
+
+    final success = await authProvider.signInWithEmailAndPassword(
       email: _email.trim(),
       password: _password,
     );
+
+    // Si falla, el error estará en authProvider.error
+    return success;
   }
 
   // Método para login con Google

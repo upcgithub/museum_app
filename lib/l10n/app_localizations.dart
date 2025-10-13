@@ -709,6 +709,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keep the code within\nthe scan area'**
   String get qrScannerKeepInArea;
+
+  /// No description provided for @artistStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'{artist} style'**
+  String artistStyle(String artist);
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
+
+  /// No description provided for @camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get camera;
+
+  /// No description provided for @thisMayTakeAMoment.
+  ///
+  /// In en, this message translates to:
+  /// **'This may take a moment...'**
+  String get thisMayTakeAMoment;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get tryAgain;
+
+  /// No description provided for @imageStylizedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Image stylized successfully using {artist}\'s artistic style!'**
+  String imageStylizedSuccessfully(String artist);
+
+  /// No description provided for @aiStyleTransferGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Style Transfer Guide'**
+  String get aiStyleTransferGuide;
+
+  /// No description provided for @aiStyleGuideNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: This is an AI-generated style guide for {artist}\'s artistic approach.'**
+  String aiStyleGuideNote(String artist);
+
+  /// No description provided for @tryAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Another'**
+  String get tryAnother;
+
+  /// No description provided for @share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get share;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @imageSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Image saved successfully!'**
+  String get imageSaved;
+
+  /// No description provided for @shareError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to share image. Please try again.'**
+  String get shareError;
+
+  /// No description provided for @saveError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save image. Please try again.'**
+  String get saveError;
+
+  /// No description provided for @passwordResetEmailSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email has been sent'**
+  String get passwordResetEmailSent;
+
+  /// No description provided for @pleaseEnterValidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get pleaseEnterValidEmail;
 }
 
 class _AppLocalizationsDelegate

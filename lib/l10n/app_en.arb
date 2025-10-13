@@ -166,5 +166,42 @@
     "styleTransferError": "Failed to stylize image. Please try again.",
     "qrScannerTitle": "QR Scanner",
     "qrScannerInstruction": "Point the camera at the artwork's\nQR code",
-    "qrScannerKeepInArea": "Keep the code within\nthe scan area"
+    "qrScannerKeepInArea": "Keep the code within\nthe scan area",
+    "artistStyle": "{artist} style",
+    "@artistStyle": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "gallery": "Gallery",
+    "camera": "Camera",
+    "thisMayTakeAMoment": "This may take a moment...",
+    "tryAgain": "Try Again",
+    "imageStylizedSuccessfully": "Image stylized successfully using {artist}'s artistic style!",
+    "@imageStylizedSuccessfully": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "aiStyleTransferGuide": "AI Style Transfer Guide",
+    "aiStyleGuideNote": "Note: This is an AI-generated style guide for {artist}'s artistic approach.",
+    "@aiStyleGuideNote": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "tryAnother": "Try Another",
+    "share": "Share",
+    "save": "Save",
+    "imageSaved": "Image saved successfully!",
+    "shareError": "Failed to share image. Please try again.",
+    "saveError": "Failed to save image. Please try again.",
+    "passwordResetEmailSent": "Password reset email has been sent",
+    "pleaseEnterValidEmail": "Please enter a valid email"
 } 

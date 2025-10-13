@@ -330,4 +330,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get qrScannerKeepInArea => 'Keep the code within\nthe scan area';
+
+  @override
+  String artistStyle(String artist) {
+    return '$artist style';
+  }
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get thisMayTakeAMoment => 'This may take a moment...';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
+  String imageStylizedSuccessfully(String artist) {
+    return 'Image stylized successfully using $artist\'s artistic style!';
+  }
+
+  @override
+  String get aiStyleTransferGuide => 'AI Style Transfer Guide';
+
+  @override
+  String aiStyleGuideNote(String artist) {
+    return 'Note: This is an AI-generated style guide for $artist\'s artistic approach.';
+  }
+
+  @override
+  String get tryAnother => 'Try Another';
+
+  @override
+  String get share => 'Share';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get imageSaved => 'Image saved successfully!';
+
+  @override
+  String get shareError => 'Failed to share image. Please try again.';
+
+  @override
+  String get saveError => 'Failed to save image. Please try again.';
+
+  @override
+  String get passwordResetEmailSent => 'Password reset email has been sent';
+
+  @override
+  String get pleaseEnterValidEmail => 'Please enter a valid email';
 }

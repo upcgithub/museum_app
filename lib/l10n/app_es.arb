@@ -166,5 +166,42 @@
     "styleTransferError": "Error al estilizar imagen. Inténtalo de nuevo.",
     "qrScannerTitle": "Escáner QR",
     "qrScannerInstruction": "Apunta la cámara hacia el código QR\nde la obra de arte",
-    "qrScannerKeepInArea": "Mantén el código dentro\ndel área de escaneo"
+    "qrScannerKeepInArea": "Mantén el código dentro\ndel área de escaneo",
+    "artistStyle": "Estilo de {artist}",
+    "@artistStyle": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "gallery": "Galería",
+    "camera": "Cámara",
+    "thisMayTakeAMoment": "Esto puede tomar un momento...",
+    "tryAgain": "Intentar de Nuevo",
+    "imageStylizedSuccessfully": "¡Imagen estilizada exitosamente usando el estilo artístico de {artist}!",
+    "@imageStylizedSuccessfully": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "aiStyleTransferGuide": "Guía de Transferencia de Estilo IA",
+    "aiStyleGuideNote": "Nota: Esta es una guía de estilo generada por IA para el enfoque artístico de {artist}.",
+    "@aiStyleGuideNote": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "tryAnother": "Intentar con Otra",
+    "share": "Compartir",
+    "save": "Guardar",
+    "imageSaved": "¡Imagen guardada exitosamente!",
+    "shareError": "Error al compartir la imagen. Por favor, intenta de nuevo.",
+    "saveError": "Error al guardar la imagen. Por favor, intenta de nuevo.",
+    "passwordResetEmailSent": "Se ha enviado un correo para restablecer tu contraseña",
+    "pleaseEnterValidEmail": "Por favor ingresa un correo electrónico válido"
 }

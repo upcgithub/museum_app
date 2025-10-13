@@ -11,6 +11,27 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
+  void _showErrorSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: const TextStyle(
+            fontFamily: 'Urbanist',
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        backgroundColor: AppColors.error,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
   Future<bool> _showCaptchaSheet(BuildContext context) async {
     final provider = context.read<LoginProvider>();
     final l10n = AppLocalizations.of(context)!;
@@ -114,13 +135,28 @@ class LoginScreen extends StatelessWidget {
                                                     .showSnackBar(
                                                   SnackBar(
                                                     content: Text(
-                                                      'Se ha enviado un email para restablecer tu contraseña',
+                                                      l10n.passwordResetEmailSent,
                                                       style: const TextStyle(
-                                                          fontFamily:
-                                                              'Urbanist'),
+                                                        fontFamily: 'Urbanist',
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                     ),
                                                     backgroundColor:
-                                                        Colors.green,
+                                                        AppColors.success,
+                                                    behavior: SnackBarBehavior
+                                                        .floating,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                                    margin:
+                                                        const EdgeInsets.all(
+                                                            16),
+                                                    duration: const Duration(
+                                                        seconds: 2),
                                                   ),
                                                 );
                                               }
@@ -134,28 +170,7 @@ class LoginScreen extends StatelessWidget {
                                 );
                               },
                             ),
-                            const SizedBox(height: 20),
-                            if (provider.error != null)
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: Colors.red.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                      color: Colors.red.withOpacity(0.3)),
-                                ),
-                                child: Text(
-                                  provider.error!,
-                                  style: const TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            if (provider.error != null)
-                              const SizedBox(height: 16),
+                            const SizedBox(height: 32),
                             SizedBox(
                               width: double.infinity,
                               child: Consumer<AuthProvider>(
@@ -186,6 +201,15 @@ class LoginScreen extends StatelessWidget {
                                                 ),
                                                 (route) => false,
                                               );
+                                            } else {
+                                              // Mostrar error en SnackBar
+                                              final errorMessage =
+                                                  provider.error ??
+                                                      authProvider.error;
+                                              if (errorMessage != null) {
+                                                _showErrorSnackBar(
+                                                    context, errorMessage);
+                                              }
                                             }
                                           }
                                         : null,
@@ -278,6 +302,14 @@ class LoginScreen extends StatelessWidget {
                                                     ),
                                                     (route) => false,
                                                   );
+                                                } else {
+                                                  // Mostrar error en SnackBar
+                                                  final errorMessage =
+                                                      authProvider.error;
+                                                  if (errorMessage != null) {
+                                                    _showErrorSnackBar(
+                                                        context, errorMessage);
+                                                  }
                                                 }
                                               },
                                       ),
@@ -304,6 +336,14 @@ class LoginScreen extends StatelessWidget {
                                                     ),
                                                     (route) => false,
                                                   );
+                                                } else {
+                                                  // Mostrar error en SnackBar
+                                                  final errorMessage =
+                                                      authProvider.error;
+                                                  if (errorMessage != null) {
+                                                    _showErrorSnackBar(
+                                                        context, errorMessage);
+                                                  }
                                                 }
                                               },
                                       ),
@@ -690,144 +730,140 @@ class _CaptchaBottomSheet extends StatelessWidget {
     final theme = Theme.of(context);
     final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
 
-    return SafeArea(
-      top: false,
-      child: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-        ),
-        padding: EdgeInsets.fromLTRB(24, 24, 24, 24 + bottomPadding),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.logInButton,
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontFamily: 'Playfair',
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.secondary,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        l10n.captchaInstruction,
-                        style: AppTextStyles.body.copyWith(
-                          fontSize: 14,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  icon: const Icon(Icons.close_rounded),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            _CaptchaChallenge(l10n: l10n),
-            const SizedBox(height: 24),
-            if (provider.showCaptchaError)
-              Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.red.withOpacity(0.3)),
-                ),
-                child: Row(
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      padding: EdgeInsets.fromLTRB(24, 24, 24, 24 + bottomPadding),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.error_outline,
-                        size: 18, color: Colors.redAccent),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        l10n.captchaReset,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    Text(
+                      l10n.logInButton,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontFamily: 'Playfair',
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.secondary,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        provider.resetCaptcha();
-                      },
-                      child: Text(
-                        l10n.retry,
-                        style: const TextStyle(
-                          fontFamily: 'Urbanist',
-                          fontWeight: FontWeight.w600,
-                        ),
+                    const SizedBox(height: 6),
+                    Text(
+                      l10n.captchaInstruction,
+                      style: AppTextStyles.body.copyWith(
+                        fontSize: 14,
+                        color: Colors.grey[700],
                       ),
                     ),
                   ],
                 ),
               ),
-            if (!provider.showCaptchaError)
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton.icon(
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    provider.resetCaptcha();
-                  },
-                  icon: const Icon(Icons.refresh_rounded),
-                  label: Text(
-                    l10n.captchaReset,
-                    style: const TextStyle(
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w600,
+              IconButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                icon: const Icon(Icons.close_rounded),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          _CaptchaChallenge(l10n: l10n),
+          const SizedBox(height: 24),
+          if (provider.showCaptchaError)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.red.withOpacity(0.3)),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.error_outline,
+                      size: 18, color: Colors.redAccent),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      l10n.captchaReset,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.redAccent,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                ),
-              ),
-            const SizedBox(height: 12),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: provider.captchaSolved
-                    ? () {
-                        FocusScope.of(context).unfocus();
-                        Navigator.of(context).pop(true);
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.secondary,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                  TextButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      provider.resetCaptcha();
+                    },
+                    child: Text(
+                      l10n.retry,
+                      style: const TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  provider.captchaSolved
-                      ? l10n.captchaSolved
-                      : l10n.captchaInstruction,
+                ],
+              ),
+            ),
+          if (!provider.showCaptchaError)
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  provider.resetCaptcha();
+                },
+                icon: const Icon(Icons.refresh_rounded),
+                label: Text(
+                  l10n.captchaReset,
                   style: const TextStyle(
                     fontFamily: 'Urbanist',
                     fontWeight: FontWeight.w600,
-                    fontSize: 16,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ),
-          ],
-        ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: provider.captchaSolved
+                  ? () {
+                      FocusScope.of(context).unfocus();
+                      Navigator.of(context).pop(true);
+                    }
+                  : null,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.secondary,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                provider.captchaSolved
+                    ? l10n.captchaSolved
+                    : l10n.captchaInstruction,
+                style: const TextStyle(
+                  fontFamily: 'Urbanist',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

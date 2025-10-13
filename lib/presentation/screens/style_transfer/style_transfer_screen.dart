@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'dart:developer';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:museum_app/l10n/app_localizations.dart';
 import 'package:museum_app/presentation/providers/gemini_provider.dart';
@@ -32,7 +35,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
     log('🎨 StyleTransferScreen: initState called');
     log('   Artist: ${widget.artist}');
     log('   Artwork: ${widget.artworkTitle}');
-    
+
     // Clear any previous style transfer state
     WidgetsBinding.instance.addPostFrameCallback((_) {
       log('🧹 StyleTransferScreen: Clearing previous state...');
@@ -43,7 +46,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
   Future<void> _pickImage(ImageSource source) async {
     log('📷 StyleTransferScreen: _pickImage called');
     log('   Source: $source');
-    
+
     try {
       log('🖼️ StyleTransferScreen: Opening image picker...');
       final XFile? image = await _imagePicker.pickImage(
@@ -57,7 +60,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
         log('✅ StyleTransferScreen: Image selected');
         log('   Path: ${image.path}');
         log('   Name: ${image.name}');
-        
+
         if (mounted) {
           log('🚀 StyleTransferScreen: Starting style transfer via provider...');
           final provider = context.read<GeminiProvider>();
@@ -78,8 +81,129 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to pick image: $e'),
+            content: Text(
+              'Failed to pick image: $e',
+              style: const TextStyle(
+                fontFamily: 'Urbanist',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.all(16),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _shareImage(Uint8List imageBytes, AppLocalizations l10n) async {
+    log('📤 StyleTransferScreen: _shareImage called');
+    try {
+      // Create a temporary file to share
+      final tempDir = await getTemporaryDirectory();
+      final fileName =
+          'stylized_${widget.artist.replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final file = File('${tempDir.path}/$fileName');
+
+      log('💾 StyleTransferScreen: Writing image to temp file...');
+      await file.writeAsBytes(imageBytes);
+      log('✅ StyleTransferScreen: Temp file created: ${file.path}');
+
+      // Share the file
+      log('📤 StyleTransferScreen: Sharing file...');
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        text: '${l10n.stylizedImage} - ${widget.artist} style',
+      );
+      log('✅ StyleTransferScreen: Share completed');
+    } catch (e) {
+      log('❌ StyleTransferScreen: Error sharing image: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.shareError,
+              style: const TextStyle(
+                fontFamily: 'Urbanist',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.all(16),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _saveImage(Uint8List imageBytes, AppLocalizations l10n) async {
+    log('💾 StyleTransferScreen: _saveImage called');
+    try {
+      // Save to gallery using image_picker's XFile
+      final tempDir = await getTemporaryDirectory();
+      final fileName =
+          'stylized_${widget.artist.replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final file = File('${tempDir.path}/$fileName');
+
+      log('💾 StyleTransferScreen: Writing image to file...');
+      await file.writeAsBytes(imageBytes);
+      log('✅ StyleTransferScreen: File saved: ${file.path}');
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.imageSaved,
+              style: const TextStyle(
+                fontFamily: 'Urbanist',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            backgroundColor: AppColors.success,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.all(16),
+            duration: const Duration(seconds: 3),
+            action: SnackBarAction(
+              label: l10n.share,
+              textColor: Colors.white,
+              backgroundColor: Colors.white.withOpacity(0.2),
+              onPressed: () => _shareImage(imageBytes, l10n),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      log('❌ StyleTransferScreen: Error saving image: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.saveError,
+              style: const TextStyle(
+                fontFamily: 'Urbanist',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.all(16),
+            duration: const Duration(seconds: 3),
           ),
         );
       }
@@ -122,9 +246,9 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
               ListTile(
                 leading:
                     const Icon(Icons.photo_library, color: AppColors.primary),
-                title: const Text(
-                  'Gallery',
-                  style: TextStyle(fontFamily: 'Urbanist'),
+                title: Text(
+                  l10n.gallery,
+                  style: const TextStyle(fontFamily: 'Urbanist'),
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -133,9 +257,9 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.camera_alt, color: AppColors.primary),
-                title: const Text(
-                  'Camera',
-                  style: TextStyle(fontFamily: 'Urbanist'),
+                title: Text(
+                  l10n.camera,
+                  style: const TextStyle(fontFamily: 'Urbanist'),
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -176,7 +300,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
               ),
             ),
             Text(
-              '${widget.artist} style',
+              l10n.artistStyle(widget.artist),
               style: TextStyle(
                 fontFamily: 'Urbanist',
                 fontSize: 12,
@@ -186,6 +310,25 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
             ),
           ],
         ),
+        actions: [
+          // Botón discreto para intentar con otra imagen
+          Consumer<GeminiProvider>(
+            builder: (context, provider, child) {
+              // Solo mostrar si ya hay una imagen cargada
+              if (provider.originalImage != null) {
+                return IconButton(
+                  icon: const Icon(
+                    Icons.add_photo_alternate_outlined,
+                    color: AppColors.primary,
+                  ),
+                  tooltip: l10n.tryAnother,
+                  onPressed: () => _showImageSourceDialog(context, l10n),
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ],
       ),
       body: Consumer<GeminiProvider>(
         builder: (context, provider, child) {
@@ -317,7 +460,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'This may take a moment...',
+              l10n.thisMayTakeAMoment,
               style: TextStyle(
                 fontFamily: 'Urbanist',
                 fontSize: 14,
@@ -356,7 +499,6 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () => _showImageSourceDialog(context, l10n),
-              child: const Text('Try Again'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -368,6 +510,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
+              child: Text(l10n.tryAgain),
             ),
           ],
         ),
@@ -439,7 +582,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Image stylized successfully using ${widget.artist}\'s artistic style!',
+                      l10n.imageStylizedSuccessfully(widget.artist),
                       style: const TextStyle(
                         fontFamily: 'Urbanist',
                         fontSize: 13,
@@ -477,7 +620,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'AI Style Transfer Guide',
+                        l10n.aiStyleTransferGuide,
                         style: const TextStyle(
                           fontFamily: 'Urbanist',
                           fontSize: 16,
@@ -499,7 +642,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Note: This is an AI-generated style guide for ${widget.artist}\'s artistic approach. You can use this prompt with image generation tools like DALL-E, Midjourney, or Stable Diffusion to create a stylized version.',
+                    l10n.aiStyleGuideNote(widget.artist),
                     style: TextStyle(
                       fontFamily: 'Urbanist',
                       fontSize: 12,
@@ -516,30 +659,56 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
             const SizedBox(height: 24),
 
           // Action buttons
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () => _showImageSourceDialog(context, l10n),
-                  icon: const Icon(Icons.refresh),
-                  label: const Text('Try Another'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.primary,
-                    side: const BorderSide(color: AppColors.primary),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    textStyle: const TextStyle(
-                      fontFamily: 'Urbanist',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+          if (provider.stylizedImageBytes != null) ...[
+            // Share and Save buttons (only show if image was generated)
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () =>
+                        _shareImage(provider.stylizedImageBytes!, l10n),
+                    icon: const Icon(Icons.share),
+                    label: Text(l10n.share),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      textStyle: const TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () =>
+                        _saveImage(provider.stylizedImageBytes!, l10n),
+                    icon: const Icon(Icons.download),
+                    label: Text(l10n.save),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primary,
+                      side: const BorderSide(color: AppColors.primary),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      textStyle: const TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ],
       ),
     );

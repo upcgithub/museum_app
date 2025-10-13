@@ -3,11 +3,13 @@ import 'dart:typed_data';
 import 'dart:developer';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:museum_app/core/services/replicate_service.dart';
 
 class GeminiService {
   late final GenerativeModel _chatModel;
   late final GenerativeModel _imageModel;
   final String _apiKey;
+  late final ReplicateService _replicateService;
 
   GeminiService() : _apiKey = dotenv.env['GEMINI_API_KEY'] ?? '' {
     log('🔧 GeminiService: Initializing service...');
@@ -46,6 +48,16 @@ class GeminiService {
       ),
     );
     log('✅ GeminiService: Image model initialized');
+
+    // Initialize Replicate service as fallback
+    log('🔄 GeminiService: Initializing Replicate fallback service...');
+    _replicateService = ReplicateService();
+    if (_replicateService.isAvailable) {
+      log('✅ GeminiService: Replicate fallback service available');
+    } else {
+      log('⚠️ GeminiService: Replicate fallback service not available (missing token)');
+    }
+
     log('🎉 GeminiService: Service initialization complete');
   }
 
@@ -123,19 +135,22 @@ Remember to stay in character as $artist and provide thoughtful, engaging respon
 
   /// Applies artist style to an uploaded photo using gemini-2.5-flash-image
   /// This model can generate actual images based on the input image and prompt
+  /// Falls back to Replicate's nano-banana model if Gemini fails
   /// Note: Always uses English for better image generation results
   Future<Uint8List?> stylizeImage({
     required File image,
     required String artistStyle,
     required String artworkTitle,
   }) async {
+    Uint8List? imageBytes;
+
     try {
       log('🎨 GeminiService: Starting image stylization');
       log('   Artist style: $artistStyle');
       log('   Artwork title: $artworkTitle');
       log('   Image path: ${image.path}');
 
-      final imageBytes = await image.readAsBytes();
+      imageBytes = await image.readAsBytes();
       log('✅ GeminiService: Image loaded (${imageBytes.length} bytes)');
 
       // Always use English for image generation (works better)
@@ -175,7 +190,7 @@ Remember to stay in character as $artist and provide thoughtful, engaging respon
             final bytes = part.bytes;
             log('✅ GeminiService: Image found in part $i');
             log('   Image size: ${bytes.length} bytes');
-            log('🎉 GeminiService: Image stylization completed successfully!');
+            log('🎉 GeminiService: Image stylization completed successfully with Gemini!');
             return bytes;
           } else if (part is TextPart) {
             log('   Part $i is TextPart: "${part.text.substring(0, part.text.length > 50 ? 50 : part.text.length)}..."');
@@ -192,16 +207,37 @@ Remember to stay in character as $artist and provide thoughtful, engaging respon
         log('   Text: "${responseText.substring(0, responseText.length > 200 ? 200 : responseText.length)}..."');
       }
 
-      // If no image was generated, throw an error
+      // If no image was generated, throw an error to trigger fallback
       log('❌ GeminiService: No image data found in Gemini response');
       throw Exception(
           'Failed to generate stylized image - no image data returned');
     } catch (e) {
-      log('❌ GeminiService: Error stylizing image: $e');
+      log('❌ GeminiService: Gemini image generation failed: $e');
       log('   Error type: ${e.runtimeType}');
-      if (e is Exception) {
-        log('   Exception message: $e');
+
+      // Try Replicate as fallback
+      if (_replicateService.isAvailable && imageBytes != null) {
+        log('🔄 GeminiService: Attempting fallback to Replicate...');
+        try {
+          final replicateResult = await _replicateService.stylizeImage(
+            imageBytes: imageBytes,
+            artistStyle: artistStyle,
+            artworkTitle: artworkTitle,
+          );
+
+          if (replicateResult != null) {
+            log('🎉 GeminiService: Image stylization completed successfully with Replicate fallback!');
+            return replicateResult;
+          }
+        } catch (replicateError) {
+          log('❌ GeminiService: Replicate fallback also failed: $replicateError');
+          // Continue to rethrow original error
+        }
+      } else {
+        log('⚠️ GeminiService: Replicate fallback not available');
       }
+
+      // If both failed, rethrow the original error
       rethrow;
     }
   }
