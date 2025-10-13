@@ -1,11 +1,34 @@
 {
     "appTitle": "Museum App",
+    "loginTitle": "Log In",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot Password?",
+    "logInButton": "Log In",
+    "orLoginWith": "Or login with",
+    "google": "Google",
+    "apple": "Apple",
+    "createAccount": "Create Account",
+    "signUp": "Sign Up",
+    "registerTitle": "Create Account",
+    "firstNameLabel": "First Name",
+    "lastNameLabel": "Last Name",
+    "confirmPasswordLabel": "Confirm Password",
+    "acceptTerms": "I accept the Terms and Conditions",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "orSignUpWith": "Or sign up with",
+    "signupAgreementPrefix": "By signing up, you agree to the ",
+    "signupAgreementConjunction": " and ",
+    "termsOfService": "Terms of Service",
+    "dataProcessingAgreement": "Data Processing Agreement",
     "home": "Home",
     "profile": "Profile",
     "settings": "Settings",
     "premiumMember": "Premium Member",
     "profileName": "Jane Doe",
-    "profileEmail": "jane.doe@example.com",
+    "profileEmail": "jane@gmail.com",
     "savedArtworks": "Saved Artworks",
     "tickets": "Tickets",
     "exhibitions": "Exhibitions",
@@ -96,5 +119,89 @@
     "readMore": "Read more",
     "readLess": "Read less",
     "relatedToThisArtwork": "Related to this artwork",
-    "viewed": "Viewed"
+    "viewed": "Viewed",
+    "captchaInstruction": "Select the icons alphabetically",
+    "captchaSolved": "Verified",
+    "captchaReset": "Try a different sequence",
+    "captchaMuseumLabel": "Museum",
+    "captchaPaletteLabel": "Palette",
+    "captchaTheaterLabel": "Theater",
+    "aiFeaturesTitle": "AI Features",
+    "playAudioGuide": "Play Audio Guide",
+    "playAudioGuideDesc": "Listen to narration about this artwork",
+    "chatWithArtist": "Chat with {artist}",
+    "@chatWithArtist": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "chatWithArtistDesc": "Ask questions about this artwork",
+    "stylizeYourPhoto": "Stylize Your Photo",
+    "stylizeYourPhotoDesc": "Transform a photo in {artist}'s style",
+    "@stylizeYourPhotoDesc": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "sendMessage": "Send message",
+    "typeYourQuestion": "Type your question...",
+    "applyingStyle": "Applying {artist}'s style...",
+    "@applyingStyle": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "selectPhoto": "Select Photo",
+    "shareStylizedImage": "Share",
+    "downloadImage": "Download",
+    "originalImage": "Original",
+    "stylizedImage": "Stylized",
+    "chatError": "Failed to send message. Please try again.",
+    "styleTransferError": "Failed to stylize image. Please try again.",
+    "qrScannerTitle": "QR Scanner",
+    "qrScannerInstruction": "Point the camera at the artwork's\nQR code",
+    "qrScannerKeepInArea": "Keep the code within\nthe scan area",
+    "artistStyle": "{artist} style",
+    "@artistStyle": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "gallery": "Gallery",
+    "camera": "Camera",
+    "thisMayTakeAMoment": "This may take a moment...",
+    "tryAgain": "Try Again",
+    "imageStylizedSuccessfully": "Image stylized successfully using {artist}'s artistic style!",
+    "@imageStylizedSuccessfully": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "aiStyleTransferGuide": "AI Style Transfer Guide",
+    "aiStyleGuideNote": "Note: This is an AI-generated style guide for {artist}'s artistic approach.",
+    "@aiStyleGuideNote": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "tryAnother": "Try Another",
+    "share": "Share",
+    "save": "Save",
+    "imageSaved": "Image saved successfully!",
+    "shareError": "Failed to share image. Please try again.",
+    "saveError": "Failed to save image. Please try again.",
+    "passwordResetEmailSent": "Password reset email has been sent",
+    "pleaseEnterValidEmail": "Please enter a valid email"
 } 

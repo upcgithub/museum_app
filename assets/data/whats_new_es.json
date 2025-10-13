@@ -1,0 +1,26 @@
+[
+  {
+    "id": "5",
+    "title": "La Ronda de Noche",
+    "artist": "Rembrandt van Rijn",
+    "imageUrl": "https://i.guim.co.uk/img/media/5255be4caf692083ff5874ffcb9d6c2693c45af3/0_1076_4594_2755/master/4594.jpg?width=620&dpr=2&s=none&crop=none",
+    "type": "Exposición Permanente",
+    "description": "La Ronda de Noche es una de las obras maestras más icónicas de Rembrandt van Rijn y una obra fundamental en la historia del arte. Pintada en 1642, este lienzo colosal representa a la guardia cívica de Ámsterdam, mostrando la excepcional habilidad de Rembrandt para capturar movimiento, luz y sombra. El uso innovador de la luz dirige la atención del espectador al Capitán Frans Banning Cocq y su teniente, Willem van Ruytenburch, rodeados de una escena bulliciosa de guardias y figuras simbólicas.\n\nLa composición dinámica y la atención al detalle hacen de esta pintura un ejemplo innovador del arte barroco. El uso de claroscuro de Rembrandt -el dramático juego entre luz y oscuridad- añade profundidad e intensidad, destacando la individualidad de cada figura. La atmósfera animada y el simbolismo en capas invitan a los espectadores a explorar la narrativa compleja dentro de la escena.\n\nA lo largo de los siglos, La Ronda de Noche ha sufrido varias restauraciones y sigue siendo una fuente de fascinación para historiadores del arte y entusiastas. Su reciente inclusión en el proyecto 'Operación Ronda de Noche' busca preservar y descubrir más detalles sobre su creación, asegurando que su legado perdure para las generaciones futuras."
+  },
+  {
+    "id": "6",
+    "title": "La Joven de la Perla",
+    "artist": "Johannes Vermeer",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Meisje_met_de_parel.jpg/1920px-Meisje_met_de_parel.jpg",
+    "type": "Exposición Temporal",
+    "description": "A menudo llamada la 'Mona Lisa del Norte', La Joven de la Perla es una de las obras más enigmáticas y queridas de Johannes Vermeer. Creada alrededor de 1665, este retrato cautivador muestra a una joven con un turbante azul y amarillo llamativo y un pendiente de perla sobredimensionado. Su mirada directa y su expresión sutil han intrigado a los espectadores durante siglos, generando infinitas interpretaciones sobre su identidad y las intenciones de Vermeer.\n\nEl dominio de Vermeer sobre la luz y la textura es evidente en esta pintura, con transiciones suaves y detalles delicados que dan vida al sujeto. La calidad luminosa de la perla y los pliegues intrincados de la tela muestran su habilidad inigualable para representar la materialidad. La simplicidad de la composición, combinada con su profundidad emocional, la convierten en una obra maestra atemporal.\n\nEsta exposición temporal invita a los visitantes a profundizar en el contexto histórico y cultural de la Edad de Oro neerlandesa mientras aprecian la habilidad única de Vermeer para transmitir misterio e intimidad. También destaca investigaciones recientes y descubrimientos sobre la pintura, incluidos los pigmentos utilizados y las posibles inspiraciones detrás de su creación."
+  },
+  {
+    "id": "7",
+    "title": "La Lechera",
+    "artist": "Johannes Vermeer",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg",
+    "type": "Exposición Permanente",
+    "description": "La Lechera es un ejemplo quintessential del extraordinario talento de Johannes Vermeer para capturar momentos cotidianos con elegancia y reverencia. Pintada alrededor de 1658, esta obra maestra representa a una joven vertiendo leche meticulosamente en un entorno doméstico sereno. El uso de luz y color de Vermeer transforma esta escena humilde en una celebración de diligencia tranquila y belleza.\n\nLos detalles intrincados en la pintura, desde el pan texturizado hasta los reflejos sutiles en la jarra de leche, destacan la observación meticulosa y la precisión técnica de Vermeer. La paleta cálida y brillante mejora la atmósfera tranquila, atrayendo al espectador al mundo de la vida neerlandesa del siglo XVII. El juego de luz en el rostro y las manos de la lechera enfatiza aún más su concentración y dedicación a su tarea.\n\nRecientemente restaurada, La Lechera ha revelado aún más sobre el proceso de Vermeer, incluyendo dibujos subyacentes y cambios que hizo durante su creación. Esta restauración ha profundizado nuestra comprensión de su arte, permitiéndonos apreciar su capacidad para imbuir momentos ordinarios con significado profundo. Esta exposición permanente invita a los visitantes a reflexionar sobre los temas atemporales de simplicidad, trabajo y gracia encarnados en esta obra icónica."
+  }
+]

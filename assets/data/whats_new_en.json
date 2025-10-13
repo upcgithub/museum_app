@@ -1,0 +1,26 @@
+[
+  {
+    "id": "5",
+    "title": "The Night Watch",
+    "artist": "Rembrandt van Rijn",
+    "imageUrl": "https://i.guim.co.uk/img/media/5255be4caf692083ff5874ffcb9d6c2693c45af3/0_1076_4594_2755/master/4594.jpg?width=620&dpr=2&s=none&crop=none",
+    "type": "Permanent Exhibition",
+    "description": "The Night Watch is one of Rembrandt van Rijn's most iconic masterpieces and a pivotal work in art history. Painted in 1642, this colossal canvas depicts the Amsterdam civic guard, showcasing Rembrandt's exceptional skill in capturing movement, light, and shadow. The innovative use of light directs the viewer's focus to Captain Frans Banning Cocq and his lieutenant, Willem van Ruytenburch, surrounded by a bustling scene of guardsmen and symbolic figures.\n\nThe painting's dynamic composition and attention to detail make it a groundbreaking example of Baroque art. Rembrandt's use of chiaroscuro—the dramatic interplay between light and dark—adds depth and intensity, highlighting the individuality of each figure. The lively atmosphere and layered symbolism invite viewers to explore the complex narrative within the scene.\n\nOver the centuries, The Night Watch has undergone several restorations and remains a source of fascination for art historians and enthusiasts alike. Its recent inclusion in the 'Operation Night Watch' project aims to preserve and uncover more details about its creation, ensuring its legacy endures for future generations."
+  },
+  {
+    "id": "6",
+    "title": "Girl with a Pearl Earring",
+    "artist": "Johannes Vermeer",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Meisje_met_de_parel.jpg/1920px-Meisje_met_de_parel.jpg",
+    "type": "Temporary Exhibition",
+    "description": "Often called the 'Mona Lisa of the North', Girl with a Pearl Earring is one of Johannes Vermeer's most enigmatic and beloved works. Created around 1665, this captivating portrait features a young woman with a striking blue and yellow turban and an oversized pearl earring. Her direct gaze and subtle expression have intrigued viewers for centuries, generating endless interpretations about her identity and Vermeer's intentions.\n\nVermeer's mastery of light and texture is evident in this painting, with smooth transitions and delicate details that bring the subject to life. The luminous quality of the pearl and the intricate folds of fabric showcase his unparalleled skill in depicting materiality. The simplicity of the composition, combined with its emotional depth, makes it a timeless masterpiece.\n\nThis temporary exhibition invites visitors to delve into the historical and cultural context of the Dutch Golden Age while appreciating Vermeer's unique ability to convey mystery and intimacy. It also highlights recent research and discoveries about the painting, including the pigments used and possible inspirations behind its creation."
+  },
+  {
+    "id": "7",
+    "title": "The Milkmaid",
+    "artist": "Johannes Vermeer",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg/1920px-Vermeer%2C_Johannes_-_Woman_reading_a_letter_-_ca._1662-1663.jpg",
+    "type": "Permanent Exhibition",
+    "description": "The Milkmaid is a quintessential example of Johannes Vermeer's extraordinary talent for capturing everyday moments with elegance and reverence. Painted around 1658, this masterpiece depicts a young woman meticulously pouring milk in a serene domestic setting. Vermeer's use of light and color transforms this humble scene into a celebration of quiet diligence and beauty.\n\nThe intricate details in the painting, from the textured bread to the subtle reflections on the milk jug, highlight Vermeer's meticulous observation and technical precision. The warm, glowing palette enhances the tranquil atmosphere, drawing the viewer into the world of 17th-century Dutch life. The play of light on the milkmaid's face and hands further emphasizes her concentration and dedication to her task.\n\nRecently restored, The Milkmaid has revealed even more about Vermeer's process, including underdrawings and changes he made during its creation. This restoration has deepened our understanding of his artistry, allowing us to appreciate his ability to imbue ordinary moments with profound significance. This permanent exhibition invites visitors to reflect on the timeless themes of simplicity, labor, and grace embodied in this iconic work."
+  }
+]

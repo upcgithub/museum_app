@@ -24,6 +24,12 @@ dependencies:
   path: ^1.8.3
   audioplayers: ^5.2.1
   shared_preferences: ^2.2.2
+  path_provider: ^2.1.1
+  supabase_flutter: ^2.10.1
+  google_generative_ai: ^0.4.0
+  image_picker: ^1.1.2
+  share_plus: ^10.1.2
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +45,8 @@ flutter:
   assets:
     - assets/
     - assets/audio/
+    - assets/data/
+    - .env
   fonts:
     - family: Playfair
       fonts:

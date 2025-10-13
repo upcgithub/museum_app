@@ -8,6 +8,9 @@ import 'package:museum_app/presentation/providers/saved_artworks_provider.dart';
 import 'package:museum_app/domain/entities/artwork.dart';
 import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:museum_app/presentation/widgets/ai_options_bottom_sheet.dart';
+import 'package:museum_app/presentation/screens/artist_chat/artist_chat_screen.dart';
+import 'package:museum_app/presentation/screens/style_transfer/style_transfer_screen.dart';
 
 class ArtworkDetailScreen extends StatefulWidget {
   final String id;
@@ -16,6 +19,7 @@ class ArtworkDetailScreen extends StatefulWidget {
   final bool isViewed;
   final String description;
   final List<Map<String, dynamic>> relatedArtworks;
+  final String? artist;
 
   const ArtworkDetailScreen({
     Key? key,
@@ -25,6 +29,7 @@ class ArtworkDetailScreen extends StatefulWidget {
     this.isViewed = false,
     required this.description,
     required this.relatedArtworks,
+    this.artist,
   }) : super(key: key);
 
   @override
@@ -113,12 +118,53 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
     }
   }
 
+  void _showAiOptions() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => AiOptionsBottomSheet(
+        artist: widget.artist ?? 'Unknown Artist',
+        onPlayAudio: _togglePlay,
+        onChatWithArtist: _openArtistChat,
+        onStylizePhoto: _openStyleTransfer,
+      ),
+    );
+  }
+
+  void _openArtistChat() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ArtistChatScreen(
+          artist: widget.artist ?? 'Unknown Artist',
+          artworkTitle: widget.title,
+          artworkImageUrl: widget.imageUrl,
+          description: widget.description,
+        ),
+      ),
+    );
+  }
+
+  void _openStyleTransfer() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StyleTransferScreen(
+          artist: widget.artist ?? 'Unknown Artist',
+          artworkTitle: widget.title,
+          artworkImageUrl: widget.imageUrl,
+        ),
+      ),
+    );
+  }
+
   Future<void> _toggleSave(SavedArtworksProvider provider) async {
     final l10n = AppLocalizations.of(context)!;
     final artwork = Artwork(
       id: widget.id,
       title: widget.title,
-      artist: 'Unknown', // Podríamos pasar este dato como parámetro
+      artist: widget.artist ?? 'Unknown',
       imageUrl: widget.imageUrl,
       type: 'Unknown',
       description: widget.description,
@@ -201,14 +247,12 @@ class _ArtworkDetailScreenState extends State<ArtworkDetailScreen> {
                                     color: Color(0xFFA69365),
                                   ),
                                   child: IconButton(
-                                    icon: Icon(
-                                      _isPlaying
-                                          ? Icons.pause
-                                          : Icons.play_arrow,
+                                    icon: const Icon(
+                                      Icons.auto_awesome,
                                       color: Colors.white,
                                       size: 20,
                                     ),
-                                    onPressed: _togglePlay,
+                                    onPressed: _showAiOptions,
                                   ),
                                 ),
                               ],

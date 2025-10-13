@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:museum_app/presentation/screens/auth/login_screen.dart';
 import '../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/providers/language_provider.dart';
-import 'package:museum_app/presentation/navigation/main_navigation.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
 
 class MuseumApp extends StatelessWidget {
@@ -23,7 +23,7 @@ class MuseumApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MainNavigation(),
+      home: const LoginScreen(),
       locale: context.watch<LanguageProvider>().currentLocale,
       localizationsDelegates: const [
         AppLocalizations.delegate,

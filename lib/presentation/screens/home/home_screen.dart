@@ -231,6 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'title': artwork.title,
                           'imageUrl': artwork.imageUrl,
                           'description': artwork.description ?? '',
+                          'artist': artwork.artist,
                           'relatedArtworks': const [
                             {
                               'imageUrl':
@@ -316,6 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'title': artwork.title,
                           'imageUrl': artwork.imageUrl,
                           'description': artwork.description ?? '',
+                          'artist': artwork.artist,
                           'relatedArtworks': const [
                             {
                               'imageUrl':

@@ -60,6 +60,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
     for (final barcode in barcodes) {
       final String? code = barcode.rawValue;
       if (code != null && code.isNotEmpty) {
+        print('code: $code');
         setState(() {
           isScanned = true;
         });
@@ -263,7 +264,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'Escáner QR',
+                        AppLocalizations.of(context)!.qrScannerTitle,
                         style: AppTextStyles.heading.copyWith(
                           color: Colors.white,
                           fontSize: 24,
@@ -271,7 +272,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Apunta la cámara hacia el código QR\nde la obra de arte',
+                        AppLocalizations.of(context)!.qrScannerInstruction,
                         textAlign: TextAlign.center,
                         style: AppTextStyles.body.copyWith(
                           color: Colors.white.withOpacity(0.9),
@@ -312,7 +313,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Mantén el código dentro \ndel área de escaneo',
+                    AppLocalizations.of(context)!.qrScannerKeepInArea,
                     style: AppTextStyles.body.copyWith(
                       color: Colors.white.withOpacity(0.9),
                       fontSize: 12,

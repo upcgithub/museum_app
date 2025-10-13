@@ -3,6 +3,7 @@ class SavedArtwork {
   final String title;
   final String imageUrl;
   final String description;
+  final String artist;
   final DateTime savedAt;
 
   SavedArtwork({
@@ -10,6 +11,7 @@ class SavedArtwork {
     required this.title,
     required this.imageUrl,
     required this.description,
+    required this.artist,
     required this.savedAt,
   });
 
@@ -17,6 +19,7 @@ class SavedArtwork {
     return {
       'id': id,
       'title': title,
+      'artist': artist,
       'imageUrl': imageUrl,
       'description': description,
       'savedAt': savedAt.toIso8601String(),
@@ -29,6 +32,7 @@ class SavedArtwork {
       title: map['title'],
       imageUrl: map['imageUrl'],
       description: map['description'],
+      artist: map['artist'],
       savedAt: DateTime.parse(map['savedAt']),
     );
   }

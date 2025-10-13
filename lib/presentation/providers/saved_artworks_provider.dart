@@ -39,6 +39,7 @@ class SavedArtworksProvider extends ChangeNotifier {
       final savedArtwork = SavedArtwork(
         id: artwork.id, // Usar el mismo ID del Artwork
         title: artwork.title,
+        artist: artwork.artist,
         imageUrl: artwork.imageUrl,
         description: artwork.description ?? '',
         savedAt: DateTime.now(),

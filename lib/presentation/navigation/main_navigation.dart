@@ -41,7 +41,7 @@ class _MainNavigationState extends State<MainNavigation> {
         index: _selectedIndex,
         children: _screens,
       ),
-      floatingActionButton: ScanButton(),
+      floatingActionButton: const ScanButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _selectedIndex,
