@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "title": "Lección de Anatomía del Dr. Tulp",
+    "artist": "Rembrandt",
+    "imageUrl": "https://www.reprodart.com/kunst/rembrandt_hamerszoon_van_rijn/anatomie-des-dr-tulp.jpg",
+    "type": "Exposición Permanente",
+    "description": "La Lección de Anatomía del Dr. Tulp, pintada en 1632, es una de las obras más icónicas de Rembrandt y una obra maestra de la Edad de Oro Neerlandesa. Este cuadro retrata una lección pública de anatomía, donde el Dr. Nicolaes Tulp explica las complejidades de la mano humana. Cada figura está representada con expresiones únicas que reflejan curiosidad, estudio y respeto por la ciencia.\n\nLa composición se centra en el Dr. Tulp, iluminado por una luz dramática que contrasta con las sombras circundantes. Este uso del claroscuro crea una atmósfera casi teatral, que refleja el genio de Rembrandt para evocar emoción y profundidad.\n\nEsta obra no solo documenta un evento científico, sino que también destaca la importancia del progreso en el conocimiento médico durante el siglo XVII. Es un tributo al espíritu inquisitivo y a la capacidad de la humanidad para comprender su propia anatomía."
+  },
+  {
+    "id": "2",
+    "title": "Pinzón",
+    "artist": "Jan Fabritius",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/490px-Fabritius-vink.jpg",
+    "type": "Exposición Permanente",
+    "description": "Pinzón, creado por Jan Fabritius, destaca por su meticulosa representación de un pequeño pinzón (conocido como 'vink' en neerlandés). El nivel de detalle en el plumaje y la delicada postura del ave reflejan la habilidad del artista para capturar la naturaleza con precisión científica y sensibilidad artística.\n\nLa composición simple, con el ave como foco central, resalta la belleza en lo cotidiano. El uso de colores suaves y la atención al entorno natural sugieren una conexión íntima entre el arte y la observación del mundo natural.\n\nEsta pieza forma parte de una tradición pictórica neerlandesa que celebra la vida silvestre local, elevando incluso los sujetos más humildes a un estado de arte sublime. Pinzón invita a la contemplación y apreciación de los pequeños detalles de la naturaleza."
+  },
+  {
+    "id": "3",
+    "title": "La Magdalena Penitente",
+    "artist": "Georges de La Tour",
+    "imageUrl": "https://educacion.ufm.edu/wp-content/uploads/2013/05/Georges_de_La_Tour_007.jpg",
+    "type": "Exposición Especial",
+    "description": "La Magdalena Penitente es una de las obras más cautivadoras de Georges de La Tour, pintada en el siglo XVII. Esta obra maestra barroca representa a María Magdalena en un momento de profunda introspección, sentada frente a una vela cuya luz cálida ilumina suavemente la escena. Su mano descansa sobre una calavera, simbolizando la mortalidad y el arrepentimiento.\n\nLa composición refleja el dominio de La Tour para crear contrastes dramáticos a través del claroscuro. La oscuridad circundante contrasta con la luz de las velas, que delinean delicadamente la figura de Magdalena. Este efecto no solo enfatiza la atmósfera meditativa, sino que también subraya la naturaleza fugaz de la vida.\n\nLa pintura invita a los espectadores a reflexionar sobre temas como el arrepentimiento, la espiritualidad y la fragilidad humana. Sigue siendo una de las piezas más icónicas de La Tour y un ejemplo magistral de su capacidad para combinar simplicidad con profundidad emocional en su arte."
+  },
+  {
+    "id": "4",
+    "title": "La Noche Estrellada",
+    "artist": "Vincent van Gogh",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/440px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+    "type": "Exposición Permanente",
+    "description": "La Noche Estrellada, pintada en 1889 por Vincent van Gogh, es una de las obras más reconocibles en la historia del arte occidental. Esta obra maestra representa un cielo nocturno turbulento lleno de nubes arremolinadas, estrellas brillantes y una luna creciente radiante, todo pintado con las icónicas pinceladas gruesas de Van Gogh.\n\nLa pintura captura una vista desde la ventana de la habitación de asilo de Van Gogh en Saint-Rémy-de-Provence, Francia. Los colores vibrantes y la intensidad emocional del trabajo reflejan la agitación interna de Van Gogh y su fascinación por el cosmos. Los cipreses en primer plano se extienden hacia arriba, creando una conexión entre la tierra y los cielos.\n\nLa Noche Estrellada es celebrada no solo por su impacto visual, sino también por su profundidad emocional. Ha inspirado innumerables interpretaciones y sigue siendo un símbolo del genio artístico de Van Gogh y su capacidad para transmitir la complejidad de la emoción humana a través del arte."
+  }
+]

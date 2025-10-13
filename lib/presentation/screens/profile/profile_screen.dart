@@ -3,6 +3,7 @@ import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:museum_app/core/theme/app_text_styles.dart';
 import '../../../l10n/app_localizations.dart';
 import 'package:museum_app/presentation/widgets/language_selector.dart';
+import 'package:museum_app/presentation/navigation/routes.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -352,6 +353,11 @@ class LogoutButton extends StatelessWidget {
                   onPressed: () {
                     // Handle logout
                     Navigator.pop(context);
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.login,
+                      (_) => false,
+                    );
                   },
                   child: Text(l10n.logout),
                 ),

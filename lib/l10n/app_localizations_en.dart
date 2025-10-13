@@ -12,6 +12,75 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Museum App';
 
   @override
+  String get loginTitle => 'Log In';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get rememberMe => 'Remember me';
+
+  @override
+  String get forgotPassword => 'Forgot Password?';
+
+  @override
+  String get logInButton => 'Log In';
+
+  @override
+  String get orLoginWith => 'Or login with';
+
+  @override
+  String get google => 'Google';
+
+  @override
+  String get apple => 'Apple';
+
+  @override
+  String get createAccount => 'Create Account';
+
+  @override
+  String get signUp => 'Sign Up';
+
+  @override
+  String get registerTitle => 'Create Account';
+
+  @override
+  String get firstNameLabel => 'First Name';
+
+  @override
+  String get lastNameLabel => 'Last Name';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get acceptTerms => 'I accept the Terms and Conditions';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account?';
+
+  @override
+  String get signIn => 'Sign In';
+
+  @override
+  String get orSignUpWith => 'Or sign up with';
+
+  @override
+  String get signupAgreementPrefix => 'By signing up, you agree to the ';
+
+  @override
+  String get signupAgreementConjunction => ' and ';
+
+  @override
+  String get termsOfService => 'Terms of Service';
+
+  @override
+  String get dataProcessingAgreement => 'Data Processing Agreement';
+
+  @override
   String get home => 'Home';
 
   @override
@@ -27,7 +96,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileName => 'Jane Doe';
 
   @override
-  String get profileEmail => 'jane.doe@example.com';
+  String get profileEmail => 'jane@gmail.com';
 
   @override
   String get savedArtworks => 'Saved Artworks';
@@ -176,4 +245,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewed => 'Viewed';
+
+  @override
+  String get captchaInstruction => 'Select the icons alphabetically';
+
+  @override
+  String get captchaSolved => 'Verified';
+
+  @override
+  String get captchaReset => 'Try a different sequence';
+
+  @override
+  String get captchaMuseumLabel => 'Museum';
+
+  @override
+  String get captchaPaletteLabel => 'Palette';
+
+  @override
+  String get captchaTheaterLabel => 'Theater';
 }

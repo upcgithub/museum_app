@@ -11,6 +11,7 @@ Una aplicación móvil moderna desarrollada en Flutter que permite a los usuario
 - [Manejo de Estado](#-manejo-de-estado)
 - [Características Principales](#-características-principales)
 - [Configuración e Instalación](#-configuración-e-instalación)
+- [Configuración de Supabase](#-configuración-de-supabase)
 - [Mejoras Recomendadas](#-mejoras-recomendadas)
 - [Problemas Identificados](#-problemas-identificados)
 - [Roadmap de Mejoras](#-roadmap-de-mejoras)
@@ -342,6 +343,118 @@ class MuseumProvider extends ChangeNotifier {
    flutter run
    ```
 
+## 🔐 Configuración de Supabase
+
+La aplicación está configurada para usar **Supabase** como backend para autenticación y base de datos. Sigue estos pasos para configurar tu proyecto:
+
+### 1. Crear proyecto en Supabase
+
+1. Ve a [supabase.com](https://supabase.com) y crea una cuenta
+2. Crea un nuevo proyecto
+3. Espera a que se complete la configuración inicial
+
+### 2. Configurar autenticación
+
+1. En tu dashboard de Supabase, ve a **Authentication > Settings**
+2. En **Site URL** agrega tu URL de desarrollo:
+
+   - Para Android: `http://localhost`
+   - Para iOS: `http://localhost`
+   - Para Web: `http://localhost:3000` o tu URL de desarrollo
+
+3. En **Redirect URLs** agrega las URLs de redirección:
+   - `culture-connect://login-callback`
+   - `culture-connect://reset-password-callback`
+
+### 3. Configurar proveedores OAuth (opcional)
+
+#### Google OAuth:
+
+1. Ve a [Google Cloud Console](https://console.cloud.google.com)
+2. Crea un nuevo proyecto o selecciona uno existente
+3. Habilita la **Google+ API**
+4. Ve a **Credentials > Create Credentials > OAuth 2.0 Client IDs**
+5. Configura las **Authorized redirect URIs**:
+   - `https://your-project.supabase.co/auth/v1/callback`
+6. Copia el **Client ID** y **Client Secret**
+
+7. En Supabase Dashboard:
+   - Ve a **Authentication > Providers**
+   - Habilita Google y agrega tus credenciales
+
+#### Apple OAuth:
+
+1. Ve a [Apple Developer Console](https://developer.apple.com)
+2. Crea un **App ID** para tu aplicación
+3. Habilita **Sign In with Apple**
+4. Crea una **Services ID** y configura el **Return URL**:
+   - `https://your-project.supabase.co/auth/v1/callback`
+5. Copia el **Client ID** y genera una **Private Key**
+
+6. En Supabase Dashboard:
+   - Ve a **Authentication > Providers**
+   - Habilita Apple y agrega tus credenciales
+
+### 4. Configurar las claves en el código
+
+1. Abre el archivo `lib/core/services/supabase_keys.dart`
+2. Reemplaza los valores placeholder con tus credenciales reales:
+
+```dart
+class SupabaseKeys {
+  static const String supabaseUrl = 'https://your-project.supabase.co';
+  static const String supabaseAnonKey = 'your-anon-key-here';
+  // ... resto de URLs
+}
+```
+
+**Obtener las claves:**
+
+- URL: En tu dashboard de Supabase, ve a **Settings > API**
+- Anon Key: En la misma sección, copia la **anon public** key
+
+### 5. Configurar esquema de base de datos (opcional)
+
+Si quieres usar Supabase como base de datos, puedes crear las siguientes tablas:
+
+#### Tabla `profiles`:
+
+```sql
+CREATE TABLE profiles (
+  id UUID REFERENCES auth.users ON DELETE CASCADE,
+  email TEXT,
+  full_name TEXT,
+  avatar_url TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  PRIMARY KEY (id)
+);
+
+-- Row Level Security
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+
+-- Policies
+CREATE POLICY "Users can view own profile" ON profiles
+  FOR SELECT USING (auth.uid() = id);
+
+CREATE POLICY "Users can update own profile" ON profiles
+  FOR UPDATE USING (auth.uid() = id);
+
+-- Trigger para crear perfil automáticamente
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO public.profiles (id, email, full_name)
+  VALUES (NEW.id, NEW.email, NEW.raw_user_meta_data->>'full_name');
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
+```
+
 ### Configuración de Assets:
 
 Los assets están configurados en `pubspec.yaml`:
@@ -364,6 +477,50 @@ flutter:
           weight: 100
         # ... más pesos de fuente
 ```
+
+## 🌍 Internacionalización de Datos
+
+### Nueva Arquitectura Multi-Idioma
+
+Hemos implementado un sistema de internacionalización completo para los datos de las obras de arte:
+
+#### Archivos de Datos por Idioma:
+
+- `assets/data/artworks_en.json` - Obras populares en inglés
+- `assets/data/artworks_es.json` - Obras populares en español
+- `assets/data/whats_new_en.json` - Novedades en inglés
+- `assets/data/whats_new_es.json` - Novedades en español
+
+#### MuseumService Mejorado:
+
+```dart
+class MuseumService {
+  final String _currentLanguage;
+
+  MuseumService(this._currentLanguage);
+
+  Future<List<Artwork>> getPopularArtworks() async {
+    final String fileName = 'assets/data/artworks_$_currentLanguage.json';
+    final String jsonString = await rootBundle.loadString(fileName);
+    final List<dynamic> jsonData = json.decode(jsonString);
+    return jsonData.map((data) => Artwork.fromMap(data)).toList();
+  }
+}
+```
+
+#### Integración con LanguageProvider:
+
+- El `MuseumProvider` se actualiza automáticamente cuando cambia el idioma
+- Los datos se cargan dinámicamente según el idioma seleccionado
+- Arquitectura preparada para migración futura a Supabase
+
+#### Ventajas de la Nueva Arquitectura:
+
+- ✅ Separación clara de datos por idioma
+- ✅ Fácil mantenimiento y actualización de contenido
+- ✅ Preparado para integración con backend (Supabase)
+- ✅ Mejor organización de archivos
+- ✅ Escalabilidad para más idiomas
 
 ## 🚀 Mejoras Recomendadas
 

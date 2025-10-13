@@ -104,6 +104,144 @@ abstract class AppLocalizations {
   /// **'Museum App'**
   String get appTitle;
 
+  /// No description provided for @loginTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log In'**
+  String get loginTitle;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @passwordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// No description provided for @rememberMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get rememberMe;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get forgotPassword;
+
+  /// No description provided for @logInButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Log In'**
+  String get logInButton;
+
+  /// No description provided for @orLoginWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Or login with'**
+  String get orLoginWith;
+
+  /// No description provided for @google.
+  ///
+  /// In en, this message translates to:
+  /// **'Google'**
+  String get google;
+
+  /// No description provided for @apple.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple'**
+  String get apple;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccount;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
+
+  /// No description provided for @registerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get registerTitle;
+
+  /// No description provided for @firstNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstNameLabel;
+
+  /// No description provided for @lastNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastNameLabel;
+
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @acceptTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'I accept the Terms and Conditions'**
+  String get acceptTerms;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAccount;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signIn;
+
+  /// No description provided for @orSignUpWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Or sign up with'**
+  String get orSignUpWith;
+
+  /// No description provided for @signupAgreementPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'By signing up, you agree to the '**
+  String get signupAgreementPrefix;
+
+  /// No description provided for @signupAgreementConjunction.
+  ///
+  /// In en, this message translates to:
+  /// **' and '**
+  String get signupAgreementConjunction;
+
+  /// No description provided for @termsOfService.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsOfService;
+
+  /// No description provided for @dataProcessingAgreement.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Processing Agreement'**
+  String get dataProcessingAgreement;
+
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
@@ -137,7 +275,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileEmail.
   ///
   /// In en, this message translates to:
-  /// **'jane.doe@example.com'**
+  /// **'jane@gmail.com'**
   String get profileEmail;
 
   /// No description provided for @savedArtworks.
@@ -415,6 +553,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Viewed'**
   String get viewed;
+
+  /// No description provided for @captchaInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the icons alphabetically'**
+  String get captchaInstruction;
+
+  /// No description provided for @captchaSolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get captchaSolved;
+
+  /// No description provided for @captchaReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a different sequence'**
+  String get captchaReset;
+
+  /// No description provided for @captchaMuseumLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Museum'**
+  String get captchaMuseumLabel;
+
+  /// No description provided for @captchaPaletteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Palette'**
+  String get captchaPaletteLabel;
+
+  /// No description provided for @captchaTheaterLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Theater'**
+  String get captchaTheaterLabel;
 }
 
 class _AppLocalizationsDelegate

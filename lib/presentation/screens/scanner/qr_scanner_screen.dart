@@ -60,6 +60,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
     for (final barcode in barcodes) {
       final String? code = barcode.rawValue;
       if (code != null && code.isNotEmpty) {
+        print('code: $code');
         setState(() {
           isScanned = true;
         });
