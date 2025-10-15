@@ -10,6 +10,7 @@ import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:museum_app/l10n/app_localizations.dart';
 import 'package:museum_app/presentation/providers/gemini_provider.dart';
 import 'package:museum_app/presentation/providers/stylized_photos_provider.dart';
+import 'package:museum_app/presentation/providers/auth_provider.dart';
 import 'package:museum_app/core/services/stylized_photos_service.dart';
 import 'package:museum_app/core/models/stylized_photo.dart';
 import 'package:museum_app/core/dependency_injection/service_locator.dart';
@@ -188,6 +189,13 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
       await file.writeAsBytes(imageBytes);
       log('✅ StyleTransferScreen: File saved: ${file.path}');
 
+      // Get current user ID
+      final userId = context.read<AuthProvider>().user?.id;
+      if (userId == null) {
+        log('❌ StyleTransferScreen: No user logged in');
+        throw Exception('User not logged in');
+      }
+
       // Create StylizedPhoto object and save to database
       final photo = StylizedPhoto(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -195,6 +203,7 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
         artistName: widget.artist,
         artworkTitle: widget.artworkTitle,
         createdAt: DateTime.now(),
+        userId: userId,
       );
 
       // Add to provider

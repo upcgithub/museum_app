@@ -5,6 +5,7 @@ import 'package:museum_app/domain/entities/artwork.dart';
 
 class SavedArtworksProvider extends ChangeNotifier {
   final DatabaseService _databaseService;
+  String? _currentUserId;
 
   List<SavedArtwork> _savedArtworks = [];
   bool _isLoading = false;
@@ -17,14 +18,28 @@ class SavedArtworksProvider extends ChangeNotifier {
 
   SavedArtworksProvider(this._databaseService);
 
-  /// Cargar todas las obras guardadas
+  /// Establecer el usuario actual
+  void setCurrentUser(String? userId) {
+    _currentUserId = userId;
+    if (userId != null) {
+      loadSavedArtworks();
+    } else {
+      _savedArtworks = [];
+      notifyListeners();
+    }
+  }
+
+  /// Cargar todas las obras guardadas del usuario actual
   Future<void> loadSavedArtworks() async {
+    if (_currentUserId == null) return;
+
     _isLoading = true;
     _error = null;
     notifyListeners();
 
     try {
-      _savedArtworks = await _databaseService.getAllSavedArtworks();
+      _savedArtworks =
+          await _databaseService.getAllSavedArtworks(_currentUserId!);
     } catch (e) {
       _error = 'Error loading saved artworks: $e';
     } finally {
@@ -35,6 +50,12 @@ class SavedArtworksProvider extends ChangeNotifier {
 
   /// Guardar una obra de arte
   Future<void> saveArtwork(Artwork artwork) async {
+    if (_currentUserId == null) {
+      _error = 'No user logged in';
+      notifyListeners();
+      return;
+    }
+
     try {
       final savedArtwork = SavedArtwork(
         id: artwork.id, // Usar el mismo ID del Artwork
@@ -43,6 +64,7 @@ class SavedArtworksProvider extends ChangeNotifier {
         imageUrl: artwork.imageUrl,
         description: artwork.description ?? '',
         savedAt: DateTime.now(),
+        userId: _currentUserId!,
       );
 
       await _databaseService.saveArtwork(savedArtwork);
@@ -58,8 +80,14 @@ class SavedArtworksProvider extends ChangeNotifier {
 
   /// Eliminar una obra guardada
   Future<void> removeSavedArtwork(String title) async {
+    if (_currentUserId == null) {
+      _error = 'No user logged in';
+      notifyListeners();
+      return;
+    }
+
     try {
-      await _databaseService.deleteArtwork(title);
+      await _databaseService.deleteArtwork(title, _currentUserId!);
 
       // Actualizar la lista local SIN consultar de nuevo la BD
       _savedArtworks.removeWhere((artwork) => artwork.title == title);

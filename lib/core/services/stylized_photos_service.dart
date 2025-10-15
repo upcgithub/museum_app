@@ -22,7 +22,7 @@ class StylizedPhotosService {
 
     return await openDatabase(
       dbPath,
-      version: 1,
+      version: 2,
       onCreate: (db, version) async {
         log('🗄️ StylizedPhotosService: Creating table $_tableName');
         await db.execute('''
@@ -32,9 +32,28 @@ class StylizedPhotosService {
             artistName TEXT NOT NULL,
             artworkTitle TEXT NOT NULL,
             createdAt TEXT NOT NULL,
-            thumbnailPath TEXT
+            thumbnailPath TEXT,
+            userId TEXT NOT NULL
           )
         ''');
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          log('🗄️ StylizedPhotosService: Upgrading database to version 2');
+          // Agregar columna userId
+          await db.execute('DROP TABLE IF EXISTS $_tableName');
+          await db.execute('''
+            CREATE TABLE $_tableName (
+              id TEXT PRIMARY KEY,
+              filePath TEXT NOT NULL,
+              artistName TEXT NOT NULL,
+              artworkTitle TEXT NOT NULL,
+              createdAt TEXT NOT NULL,
+              thumbnailPath TEXT,
+              userId TEXT NOT NULL
+            )
+          ''');
+        }
       },
     );
   }
@@ -67,13 +86,15 @@ class StylizedPhotosService {
     return photo;
   }
 
-  /// Get all stylized photos
-  Future<List<StylizedPhoto>> getAllPhotos() async {
-    log('📖 StylizedPhotosService: Getting all photos');
+  /// Get all stylized photos for a specific user
+  Future<List<StylizedPhoto>> getAllPhotos(String userId) async {
+    log('📖 StylizedPhotosService: Getting all photos for user: $userId');
     final db = await database;
 
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
+      where: 'userId = ?',
+      whereArgs: [userId],
       orderBy: 'createdAt DESC',
     );
 
@@ -81,31 +102,32 @@ class StylizedPhotosService {
     return List.generate(maps.length, (i) => StylizedPhoto.fromMap(maps[i]));
   }
 
-  /// Get photos by artist
-  Future<List<StylizedPhoto>> getPhotosByArtist(String artistName) async {
-    log('📖 StylizedPhotosService: Getting photos by artist: $artistName');
+  /// Get photos by artist for a specific user
+  Future<List<StylizedPhoto>> getPhotosByArtist(
+      String artistName, String userId) async {
+    log('📖 StylizedPhotosService: Getting photos by artist: $artistName for user: $userId');
     final db = await database;
 
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
-      where: 'artistName = ?',
-      whereArgs: [artistName],
+      where: 'artistName = ? AND userId = ?',
+      whereArgs: [artistName, userId],
       orderBy: 'createdAt DESC',
     );
 
     return List.generate(maps.length, (i) => StylizedPhoto.fromMap(maps[i]));
   }
 
-  /// Delete a photo
-  Future<void> deletePhoto(String id) async {
-    log('🗑️ StylizedPhotosService: Deleting photo $id');
+  /// Delete a photo for a specific user
+  Future<void> deletePhoto(String id, String userId) async {
+    log('🗑️ StylizedPhotosService: Deleting photo $id for user: $userId');
     final db = await database;
 
     // Get photo to delete file
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
-      where: 'id = ?',
-      whereArgs: [id],
+      where: 'id = ? AND userId = ?',
+      whereArgs: [id, userId],
     );
 
     if (maps.isNotEmpty) {
@@ -130,28 +152,30 @@ class StylizedPhotosService {
     // Delete from database
     await db.delete(
       _tableName,
-      where: 'id = ?',
-      whereArgs: [id],
+      where: 'id = ? AND userId = ?',
+      whereArgs: [id, userId],
     );
 
     log('✅ StylizedPhotosService: Photo deleted successfully');
   }
 
-  /// Get photo count
-  Future<int> getPhotoCount() async {
+  /// Get photo count for a specific user
+  Future<int> getPhotoCount(String userId) async {
     final db = await database;
-    final result =
-        await db.rawQuery('SELECT COUNT(*) as count FROM $_tableName');
+    final result = await db.rawQuery(
+      'SELECT COUNT(*) as count FROM $_tableName WHERE userId = ?',
+      [userId],
+    );
     return Sqflite.firstIntValue(result) ?? 0;
   }
 
-  /// Clear all photos
-  Future<void> clearAllPhotos() async {
-    log('🗑️ StylizedPhotosService: Clearing all photos');
+  /// Clear all photos for a specific user
+  Future<void> clearAllPhotos(String userId) async {
+    log('🗑️ StylizedPhotosService: Clearing all photos for user: $userId');
     final db = await database;
 
     // Get all photos to delete files
-    final photos = await getAllPhotos();
+    final photos = await getAllPhotos(userId);
     for (final photo in photos) {
       final file = File(photo.filePath);
       if (await file.exists()) {
@@ -166,7 +190,11 @@ class StylizedPhotosService {
     }
 
     // Clear database
-    await db.delete(_tableName);
-    log('✅ StylizedPhotosService: All photos cleared');
+    await db.delete(
+      _tableName,
+      where: 'userId = ?',
+      whereArgs: [userId],
+    );
+    log('✅ StylizedPhotosService: All photos cleared for user: $userId');
   }
 }

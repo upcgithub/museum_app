@@ -71,7 +71,23 @@ void main() async {
           },
         ),
         ChangeNotifierProvider(
-          create: (_) => SavedArtworksProvider(getIt<DatabaseService>()),
+          create: (context) {
+            final authProvider = context.read<AuthProvider>();
+            final provider = SavedArtworksProvider(getIt<DatabaseService>());
+
+            // Establecer usuario inicial si existe
+            if (authProvider.user != null) {
+              provider.setCurrentUser(authProvider.user!.id);
+            }
+
+            // Escuchar cambios de autenticación
+            authProvider.addListener(() {
+              final userId = authProvider.user?.id;
+              provider.setCurrentUser(userId);
+            });
+
+            return provider;
+          },
         ),
         ChangeNotifierProvider(
           create: (_) {
@@ -83,10 +99,23 @@ void main() async {
           },
         ),
         ChangeNotifierProvider(
-          create: (_) {
+          create: (context) {
             log('📸 App: Creating StylizedPhotosProvider...');
+            final authProvider = context.read<AuthProvider>();
             final provider =
                 StylizedPhotosProvider(getIt<StylizedPhotosService>());
+
+            // Establecer usuario inicial si existe
+            if (authProvider.user != null) {
+              provider.setCurrentUser(authProvider.user!.id);
+            }
+
+            // Escuchar cambios de autenticación
+            authProvider.addListener(() {
+              final userId = authProvider.user?.id;
+              provider.setCurrentUser(userId);
+            });
+
             log('✅ App: StylizedPhotosProvider created');
             return provider;
           },

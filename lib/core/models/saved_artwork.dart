@@ -5,6 +5,7 @@ class SavedArtwork {
   final String description;
   final String artist;
   final DateTime savedAt;
+  final String userId; // ID del usuario que guardó la obra
 
   SavedArtwork({
     required this.id, // Ahora es requerido
@@ -13,6 +14,7 @@ class SavedArtwork {
     required this.description,
     required this.artist,
     required this.savedAt,
+    required this.userId,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class SavedArtwork {
       'imageUrl': imageUrl,
       'description': description,
       'savedAt': savedAt.toIso8601String(),
+      'userId': userId,
     };
   }
 
@@ -34,6 +37,7 @@ class SavedArtwork {
       description: map['description'],
       artist: map['artist'],
       savedAt: DateTime.parse(map['savedAt']),
+      userId: map['userId'],
     );
   }
 }

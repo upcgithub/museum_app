@@ -5,6 +5,7 @@ class StylizedPhoto {
   final String artworkTitle;
   final DateTime createdAt;
   final String? thumbnailPath;
+  final String userId; // ID del usuario que creó la foto
 
   StylizedPhoto({
     required this.id,
@@ -13,6 +14,7 @@ class StylizedPhoto {
     required this.artworkTitle,
     required this.createdAt,
     this.thumbnailPath,
+    required this.userId,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class StylizedPhoto {
       'artworkTitle': artworkTitle,
       'createdAt': createdAt.toIso8601String(),
       'thumbnailPath': thumbnailPath,
+      'userId': userId,
     };
   }
 
@@ -34,6 +37,7 @@ class StylizedPhoto {
       artworkTitle: map['artworkTitle'] as String,
       createdAt: DateTime.parse(map['createdAt'] as String),
       thumbnailPath: map['thumbnailPath'] as String?,
+      userId: map['userId'] as String,
     );
   }
 
@@ -44,6 +48,7 @@ class StylizedPhoto {
     String? artworkTitle,
     DateTime? createdAt,
     String? thumbnailPath,
+    String? userId,
   }) {
     return StylizedPhoto(
       id: id ?? this.id,
@@ -52,6 +57,7 @@ class StylizedPhoto {
       artworkTitle: artworkTitle ?? this.artworkTitle,
       createdAt: createdAt ?? this.createdAt,
       thumbnailPath: thumbnailPath ?? this.thumbnailPath,
+      userId: userId ?? this.userId,
     );
   }
 }

@@ -5,16 +5,14 @@ import 'package:museum_app/core/services/stylized_photos_service.dart';
 
 class StylizedPhotosProvider extends ChangeNotifier {
   final StylizedPhotosService _service;
+  String? _currentUserId;
 
   List<StylizedPhoto> _photos = [];
   bool _isLoading = false;
   bool _isInitialized = false;
   String? _error;
 
-  StylizedPhotosProvider(this._service) {
-    // Load photos count on initialization (lightweight)
-    _initializeCount();
-  }
+  StylizedPhotosProvider(this._service);
 
   // Getters
   List<StylizedPhoto> get photos => _photos;
@@ -24,12 +22,26 @@ class StylizedPhotosProvider extends ChangeNotifier {
   bool get hasPhotos => _photos.isNotEmpty;
   bool get isInitialized => _isInitialized;
 
+  /// Establecer el usuario actual
+  void setCurrentUser(String? userId) {
+    _currentUserId = userId;
+    if (userId != null) {
+      _initializeCount();
+    } else {
+      _photos = [];
+      _isInitialized = false;
+      notifyListeners();
+    }
+  }
+
   /// Initialize photo count (lightweight operation)
   Future<void> _initializeCount() async {
+    if (_currentUserId == null) return;
+
     try {
-      final count = await _service.getPhotoCount();
+      final count = await _service.getPhotoCount(_currentUserId!);
       // Just set a placeholder count without loading all photos
-      log('📊 StylizedPhotosProvider: Initialized with $count photos');
+      log('📊 StylizedPhotosProvider: Initialized with $count photos for user: $_currentUserId');
       _isInitialized = true;
       notifyListeners();
     } catch (e) {
@@ -37,21 +49,26 @@ class StylizedPhotosProvider extends ChangeNotifier {
     }
   }
 
-  /// Load all photos
+  /// Load all photos for the current user
   Future<void> loadPhotos() async {
+    if (_currentUserId == null) {
+      log('⚠️ StylizedPhotosProvider: No user logged in');
+      return;
+    }
+
     // Prevent multiple simultaneous loads
     if (_isLoading) {
       log('⚠️ StylizedPhotosProvider: Already loading, skipping...');
       return;
     }
 
-    log('📸 StylizedPhotosProvider: Loading photos');
+    log('📸 StylizedPhotosProvider: Loading photos for user: $_currentUserId');
     _isLoading = true;
     _error = null;
     notifyListeners();
 
     try {
-      _photos = await _service.getAllPhotos();
+      _photos = await _service.getAllPhotos(_currentUserId!);
       log('✅ StylizedPhotosProvider: Loaded ${_photos.length} photos');
     } catch (e) {
       log('❌ StylizedPhotosProvider: Error loading photos: $e');
@@ -64,6 +81,12 @@ class StylizedPhotosProvider extends ChangeNotifier {
 
   /// Add a new photo
   Future<void> addPhoto(StylizedPhoto photo) async {
+    if (_currentUserId == null) {
+      _error = 'No user logged in';
+      notifyListeners();
+      return;
+    }
+
     log('➕ StylizedPhotosProvider: Adding photo ${photo.id}');
     try {
       await _service.savePhoto(photo);
@@ -80,9 +103,15 @@ class StylizedPhotosProvider extends ChangeNotifier {
 
   /// Delete a photo
   Future<void> deletePhoto(String id) async {
+    if (_currentUserId == null) {
+      _error = 'No user logged in';
+      notifyListeners();
+      return;
+    }
+
     log('🗑️ StylizedPhotosProvider: Deleting photo $id');
     try {
-      await _service.deletePhoto(id);
+      await _service.deletePhoto(id, _currentUserId!);
       _photos.removeWhere((photo) => photo.id == id);
       log('✅ StylizedPhotosProvider: Photo deleted successfully');
       notifyListeners();
@@ -112,11 +141,17 @@ class StylizedPhotosProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Clear all photos
+  /// Clear all photos for the current user
   Future<void> clearAllPhotos() async {
-    log('🗑️ StylizedPhotosProvider: Clearing all photos');
+    if (_currentUserId == null) {
+      _error = 'No user logged in';
+      notifyListeners();
+      return;
+    }
+
+    log('🗑️ StylizedPhotosProvider: Clearing all photos for user: $_currentUserId');
     try {
-      await _service.clearAllPhotos();
+      await _service.clearAllPhotos(_currentUserId!);
       _photos.clear();
       log('✅ StylizedPhotosProvider: All photos cleared');
       notifyListeners();

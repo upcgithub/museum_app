@@ -20,7 +20,7 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 2, // Incrementar versión para migración
+      version: 3, // Incrementar versión para agregar userId
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
@@ -34,7 +34,8 @@ class DatabaseService {
         artist TEXT NOT NULL,
         imageUrl TEXT NOT NULL,
         description TEXT NOT NULL,
-        savedAt TEXT NOT NULL
+        savedAt TEXT NOT NULL,
+        userId TEXT NOT NULL
       )
     ''');
   }
@@ -42,6 +43,11 @@ class DatabaseService {
   Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       // Migrar de int id a String id
+      await db.execute('DROP TABLE IF EXISTS saved_artworks');
+      await _createDB(db, newVersion);
+    }
+    if (oldVersion < 3) {
+      // Agregar columna userId
       await db.execute('DROP TABLE IF EXISTS saved_artworks');
       await _createDB(db, newVersion);
     }
@@ -57,38 +63,43 @@ class DatabaseService {
     return artwork;
   }
 
-  Future<List<SavedArtwork>> getAllSavedArtworks() async {
-    final db = await instance.database;
-    final result = await db.query('saved_artworks', orderBy: 'savedAt DESC');
-    return result.map((json) => SavedArtwork.fromMap(json)).toList();
-  }
-
-  Future<bool> isArtworkSaved(String title) async {
+  Future<List<SavedArtwork>> getAllSavedArtworks(String userId) async {
     final db = await instance.database;
     final result = await db.query(
       'saved_artworks',
-      where: 'title = ?',
-      whereArgs: [title],
+      where: 'userId = ?',
+      whereArgs: [userId],
+      orderBy: 'savedAt DESC',
+    );
+    return result.map((json) => SavedArtwork.fromMap(json)).toList();
+  }
+
+  Future<bool> isArtworkSaved(String title, String userId) async {
+    final db = await instance.database;
+    final result = await db.query(
+      'saved_artworks',
+      where: 'title = ? AND userId = ?',
+      whereArgs: [title, userId],
     );
     return result.isNotEmpty;
   }
 
-  Future<int> deleteArtwork(String title) async {
+  Future<int> deleteArtwork(String title, String userId) async {
     final db = await instance.database;
     return await db.delete(
       'saved_artworks',
-      where: 'title = ?',
-      whereArgs: [title],
+      where: 'title = ? AND userId = ?',
+      whereArgs: [title, userId],
     );
   }
 
   // Método adicional para eliminar por ID
-  Future<int> deleteArtworkById(String id) async {
+  Future<int> deleteArtworkById(String id, String userId) async {
     final db = await instance.database;
     return await db.delete(
       'saved_artworks',
-      where: 'id = ?',
-      whereArgs: [id],
+      where: 'id = ? AND userId = ?',
+      whereArgs: [id, userId],
     );
   }
 }
