@@ -374,6 +374,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get imageSaved => 'Image saved successfully!';
 
   @override
+  String get imageSharedSuccessfully => 'Image shared successfully!';
+
+  @override
   String get shareError => 'Failed to share image. Please try again.';
 
   @override
@@ -384,4 +387,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pleaseEnterValidEmail => 'Please enter a valid email';
+
+  @override
+  String get stylizedGallery => 'Stylized Gallery';
+
+  @override
+  String photosCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'photos',
+      one: 'photo',
+      zero: 'photos',
+    );
+    return '$count $_temp0';
+  }
+
+  @override
+  String get all => 'All';
+
+  @override
+  String noPhotosForArtist(String artist) {
+    return 'No photos for $artist';
+  }
+
+  @override
+  String get noStylizedPhotosYet => 'No Stylized Photos Yet';
+
+  @override
+  String get createYourFirstStylizedPhoto =>
+      'Create your first stylized photo by exploring artworks and using the AI style transfer feature!';
+
+  @override
+  String get startCreating => 'Start Creating';
+
+  @override
+  String get deletePhoto => 'Delete Photo';
+
+  @override
+  String get deletePhotoConfirmation =>
+      'Are you sure you want to delete this photo? This action cannot be undone.';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get photoDeleted => 'Photo deleted successfully';
+
+  @override
+  String get stylizedPhotos => 'Stylized Photos';
 }

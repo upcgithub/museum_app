@@ -200,8 +200,35 @@
     "share": "Compartir",
     "save": "Guardar",
     "imageSaved": "¡Imagen guardada exitosamente!",
+    "imageSharedSuccessfully": "¡Imagen compartida exitosamente!",
     "shareError": "Error al compartir la imagen. Por favor, intenta de nuevo.",
     "saveError": "Error al guardar la imagen. Por favor, intenta de nuevo.",
     "passwordResetEmailSent": "Se ha enviado un correo para restablecer tu contraseña",
-    "pleaseEnterValidEmail": "Por favor ingresa un correo electrónico válido"
+    "pleaseEnterValidEmail": "Por favor ingresa un correo electrónico válido",
+    "stylizedGallery": "Galería Estilizada",
+    "photosCount": "{count} {count, plural, =0{fotos} =1{foto} other{fotos}}",
+    "@photosCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "all": "Todas",
+    "noPhotosForArtist": "No hay fotos de {artist}",
+    "@noPhotosForArtist": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "noStylizedPhotosYet": "Aún No Hay Fotos Estilizadas",
+    "createYourFirstStylizedPhoto": "¡Crea tu primera foto estilizada explorando obras de arte y usando la función de transferencia de estilo con IA!",
+    "startCreating": "Empezar a Crear",
+    "deletePhoto": "Eliminar Foto",
+    "deletePhotoConfirmation": "¿Estás seguro de que deseas eliminar esta foto? Esta acción no se puede deshacer.",
+    "delete": "Eliminar",
+    "photoDeleted": "Foto eliminada exitosamente",
+    "stylizedPhotos": "Fotos Estilizadas"
 }

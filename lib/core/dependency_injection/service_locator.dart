@@ -3,6 +3,7 @@ import 'package:museum_app/core/services/museum_service.dart';
 import 'package:museum_app/core/services/database_service.dart';
 import 'package:museum_app/core/services/auth_service.dart';
 import 'package:museum_app/core/services/supabase_config.dart';
+import 'package:museum_app/core/services/stylized_photos_service.dart';
 import 'package:museum_app/domain/repositories/auth_repository.dart';
 import 'package:museum_app/domain/usecases/auth_usecases.dart';
 import 'package:museum_app/data/repositories/auth_repository_impl.dart';
@@ -13,6 +14,10 @@ final GetIt getIt = GetIt.instance;
 void setupServiceLocator() {
   // Services - Database first (no dependencies)
   getIt.registerLazySingleton<DatabaseService>(() => DatabaseService.instance);
+
+  // Stylized Photos Service
+  getIt.registerLazySingleton<StylizedPhotosService>(
+      () => StylizedPhotosService());
 
   // Supabase configuration
   getIt.registerLazySingleton<SupabaseConfig>(() => SupabaseConfig());

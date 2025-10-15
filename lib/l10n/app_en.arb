@@ -200,8 +200,35 @@
     "share": "Share",
     "save": "Save",
     "imageSaved": "Image saved successfully!",
+    "imageSharedSuccessfully": "Image shared successfully!",
     "shareError": "Failed to share image. Please try again.",
     "saveError": "Failed to save image. Please try again.",
     "passwordResetEmailSent": "Password reset email has been sent",
-    "pleaseEnterValidEmail": "Please enter a valid email"
+    "pleaseEnterValidEmail": "Please enter a valid email",
+    "stylizedGallery": "Stylized Gallery",
+    "photosCount": "{count} {count, plural, =0{photos} =1{photo} other{photos}}",
+    "@photosCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "all": "All",
+    "noPhotosForArtist": "No photos for {artist}",
+    "@noPhotosForArtist": {
+        "placeholders": {
+            "artist": {
+                "type": "String"
+            }
+        }
+    },
+    "noStylizedPhotosYet": "No Stylized Photos Yet",
+    "createYourFirstStylizedPhoto": "Create your first stylized photo by exploring artworks and using the AI style transfer feature!",
+    "startCreating": "Start Creating",
+    "deletePhoto": "Delete Photo",
+    "deletePhotoConfirmation": "Are you sure you want to delete this photo? This action cannot be undone.",
+    "delete": "Delete",
+    "photoDeleted": "Photo deleted successfully",
+    "stylizedPhotos": "Stylized Photos"
 } 

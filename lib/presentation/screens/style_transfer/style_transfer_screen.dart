@@ -9,6 +9,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:museum_app/l10n/app_localizations.dart';
 import 'package:museum_app/presentation/providers/gemini_provider.dart';
+import 'package:museum_app/presentation/providers/stylized_photos_provider.dart';
+import 'package:museum_app/core/services/stylized_photos_service.dart';
+import 'package:museum_app/core/models/stylized_photo.dart';
+import 'package:museum_app/core/dependency_injection/service_locator.dart';
 
 class StyleTransferScreen extends StatefulWidget {
   final String artist;
@@ -116,11 +120,33 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
 
       // Share the file
       log('📤 StyleTransferScreen: Sharing file...');
-      await Share.shareXFiles(
+      final result = await Share.shareXFiles(
         [XFile(file.path)],
         text: '${l10n.stylizedImage} - ${widget.artist} style',
       );
-      log('✅ StyleTransferScreen: Share completed');
+      log('✅ StyleTransferScreen: Share completed with status: ${result.status}');
+
+      // Show success message if shared successfully
+      if (mounted && result.status == ShareResultStatus.success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.imageSharedSuccessfully,
+              style: const TextStyle(
+                fontFamily: 'Urbanist',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            backgroundColor: AppColors.success,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.all(16),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
     } catch (e) {
       log('❌ StyleTransferScreen: Error sharing image: $e');
       if (mounted) {
@@ -149,15 +175,34 @@ class _StyleTransferScreenState extends State<StyleTransferScreen> {
   Future<void> _saveImage(Uint8List imageBytes, AppLocalizations l10n) async {
     log('💾 StyleTransferScreen: _saveImage called');
     try {
-      // Save to gallery using image_picker's XFile
-      final tempDir = await getTemporaryDirectory();
+      // Get the stylized photos service
+      final photosService = getIt<StylizedPhotosService>();
+      final photosDir = await photosService.getPhotosDirectory();
+
+      // Create unique filename
       final fileName =
           'stylized_${widget.artist.replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}.jpg';
-      final file = File('${tempDir.path}/$fileName');
+      final file = File('${photosDir.path}/$fileName');
 
-      log('💾 StyleTransferScreen: Writing image to file...');
+      log('💾 StyleTransferScreen: Writing image to permanent storage...');
       await file.writeAsBytes(imageBytes);
       log('✅ StyleTransferScreen: File saved: ${file.path}');
+
+      // Create StylizedPhoto object and save to database
+      final photo = StylizedPhoto(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        filePath: file.path,
+        artistName: widget.artist,
+        artworkTitle: widget.artworkTitle,
+        createdAt: DateTime.now(),
+      );
+
+      // Add to provider
+      if (mounted) {
+        await context.read<StylizedPhotosProvider>().addPhoto(photo);
+      }
+
+      log('✅ StyleTransferScreen: Photo saved to gallery');
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

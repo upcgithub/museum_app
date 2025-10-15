@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:museum_app/core/theme/app_colors.dart';
 import 'package:museum_app/core/theme/app_text_styles.dart';
 import '../../../l10n/app_localizations.dart';
 import 'package:museum_app/presentation/widgets/language_selector.dart';
 import 'package:museum_app/presentation/navigation/routes.dart';
+import 'package:museum_app/presentation/providers/stylized_photos_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -147,10 +149,17 @@ class QuickLinks extends StatelessWidget {
               title: l10n.tickets,
               count: '3',
             ),
-            QuickLinkCard(
-              icon: Icons.museum,
-              title: l10n.exhibitions,
-              count: '12',
+            Consumer<StylizedPhotosProvider>(
+              builder: (context, provider, child) {
+                return QuickLinkCard(
+                  icon: Icons.auto_awesome,
+                  title: l10n.stylizedPhotos,
+                  count: provider.photoCount.toString(),
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.stylizedGallery);
+                  },
+                );
+              },
             ),
             QuickLinkCard(
               icon: Icons.qr_code,
@@ -168,12 +177,14 @@ class QuickLinkCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final String count;
+  final VoidCallback? onTap;
 
   const QuickLinkCard({
     Key? key,
     required this.icon,
     required this.title,
     required this.count,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -194,7 +205,7 @@ class QuickLinkCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () {},
+          onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Column(

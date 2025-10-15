@@ -782,6 +782,12 @@ abstract class AppLocalizations {
   /// **'Image saved successfully!'**
   String get imageSaved;
 
+  /// No description provided for @imageSharedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Image shared successfully!'**
+  String get imageSharedSuccessfully;
+
   /// No description provided for @shareError.
   ///
   /// In en, this message translates to:
@@ -805,6 +811,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter a valid email'**
   String get pleaseEnterValidEmail;
+
+  /// No description provided for @stylizedGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Stylized Gallery'**
+  String get stylizedGallery;
+
+  /// No description provided for @photosCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} {count, plural, =0{photos} =1{photo} other{photos}}'**
+  String photosCount(int count);
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @noPhotosForArtist.
+  ///
+  /// In en, this message translates to:
+  /// **'No photos for {artist}'**
+  String noPhotosForArtist(String artist);
+
+  /// No description provided for @noStylizedPhotosYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Stylized Photos Yet'**
+  String get noStylizedPhotosYet;
+
+  /// No description provided for @createYourFirstStylizedPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your first stylized photo by exploring artworks and using the AI style transfer feature!'**
+  String get createYourFirstStylizedPhoto;
+
+  /// No description provided for @startCreating.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Creating'**
+  String get startCreating;
+
+  /// No description provided for @deletePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Photo'**
+  String get deletePhoto;
+
+  /// No description provided for @deletePhotoConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this photo? This action cannot be undone.'**
+  String get deletePhotoConfirmation;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @photoDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo deleted successfully'**
+  String get photoDeleted;
+
+  /// No description provided for @stylizedPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Stylized Photos'**
+  String get stylizedPhotos;
 }
 
 class _AppLocalizationsDelegate

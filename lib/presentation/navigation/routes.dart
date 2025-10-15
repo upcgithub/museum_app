@@ -4,6 +4,7 @@ import 'package:museum_app/presentation/screens/home/home_screen.dart';
 import 'package:museum_app/presentation/screens/artwork_detail/artwork_detail_screen.dart';
 import 'package:museum_app/presentation/screens/saved/saved_screen.dart';
 import 'package:museum_app/presentation/screens/auth/login_screen.dart';
+import 'package:museum_app/presentation/screens/stylized_gallery/stylized_gallery_screen.dart';
 
 class AppRoutes {
   static const String home = '/';
@@ -11,6 +12,7 @@ class AppRoutes {
   static const String artworkDetail = '/artwork-detail';
   static const String saved = '/saved';
   static const String artworks = '/artworks';
+  static const String stylizedGallery = '/stylized-gallery';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -50,6 +52,10 @@ class AppRoutes {
       case artworks:
         return MaterialPageRoute(
           builder: (_) => const ArtworksScreen(),
+        );
+      case stylizedGallery:
+        return MaterialPageRoute(
+          builder: (_) => const StylizedGalleryScreen(),
         );
       default:
         return MaterialPageRoute(

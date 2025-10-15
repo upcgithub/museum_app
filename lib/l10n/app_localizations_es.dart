@@ -378,6 +378,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get imageSaved => '¡Imagen guardada exitosamente!';
 
   @override
+  String get imageSharedSuccessfully => '¡Imagen compartida exitosamente!';
+
+  @override
   String get shareError =>
       'Error al compartir la imagen. Por favor, intenta de nuevo.';
 
@@ -392,4 +395,53 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get pleaseEnterValidEmail =>
       'Por favor ingresa un correo electrónico válido';
+
+  @override
+  String get stylizedGallery => 'Galería Estilizada';
+
+  @override
+  String photosCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'fotos',
+      one: 'foto',
+      zero: 'fotos',
+    );
+    return '$count $_temp0';
+  }
+
+  @override
+  String get all => 'Todas';
+
+  @override
+  String noPhotosForArtist(String artist) {
+    return 'No hay fotos de $artist';
+  }
+
+  @override
+  String get noStylizedPhotosYet => 'Aún No Hay Fotos Estilizadas';
+
+  @override
+  String get createYourFirstStylizedPhoto =>
+      '¡Crea tu primera foto estilizada explorando obras de arte y usando la función de transferencia de estilo con IA!';
+
+  @override
+  String get startCreating => 'Empezar a Crear';
+
+  @override
+  String get deletePhoto => 'Eliminar Foto';
+
+  @override
+  String get deletePhotoConfirmation =>
+      '¿Estás seguro de que deseas eliminar esta foto? Esta acción no se puede deshacer.';
+
+  @override
+  String get delete => 'Eliminar';
+
+  @override
+  String get photoDeleted => 'Foto eliminada exitosamente';
+
+  @override
+  String get stylizedPhotos => 'Fotos Estilizadas';
 }

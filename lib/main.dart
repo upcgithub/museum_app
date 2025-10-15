@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:museum_app/core/services/database_service.dart';
 import 'package:museum_app/core/services/supabase_config.dart';
 import 'package:museum_app/core/services/gemini_service.dart';
+import 'package:museum_app/core/services/stylized_photos_service.dart';
 import 'package:museum_app/presentation/providers/saved_artworks_provider.dart';
 import 'package:museum_app/presentation/providers/auth_provider.dart';
 import 'package:museum_app/presentation/providers/gemini_provider.dart';
+import 'package:museum_app/presentation/providers/stylized_photos_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:museum_app/presentation/app.dart';
 import 'package:museum_app/core/dependency_injection/service_locator.dart';
@@ -77,6 +79,15 @@ void main() async {
             final service = GeminiService();
             final provider = GeminiProvider(service);
             log('✅ App: GeminiProvider created');
+            return provider;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            log('📸 App: Creating StylizedPhotosProvider...');
+            final provider =
+                StylizedPhotosProvider(getIt<StylizedPhotosService>());
+            log('✅ App: StylizedPhotosProvider created');
             return provider;
           },
         ),
