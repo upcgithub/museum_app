@@ -1,0 +1,9 @@
+# Ejemplo de archivo key.properties
+# Copia este archivo a key.properties y completa con tus datos reales
+# NUNCA subas key.properties a Git
+
+storePassword=TU_PASSWORD_DEL_KEYSTORE
+keyPassword=TU_PASSWORD_DEL_KEYSTORE
+keyAlias=upload
+storeFile=/Users/hans/upload-keystore.jks
+

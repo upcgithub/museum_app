@@ -1,7 +1,12 @@
 name: museum_app
-description: A modern museum application
+description: Culture Connect - Your intelligent museum guide with AI-powered art exploration
 
 # Version format is major.minor.patch+build_number
+# version: MAJOR.MINOR.PATCH+BUILD_NUMBER
+# - Increment MAJOR for breaking changes
+# - Increment MINOR for new features
+# - Increment PATCH for bug fixes
+# - Increment BUILD_NUMBER for each release
 version: 1.0.0+1
 
 environment:
